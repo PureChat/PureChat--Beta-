@@ -1,0 +1,82 @@
+.profile_container
+{
+	display: none;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	bottom: 77px;
+	right: 280px;
+	z-index: 5;
+	color: #fff;
+	background: url(../images/transbg.png) repeat;
+
+	border: 1px solid #fff;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+}
+#profile_closer
+{
+	width: 20px;
+	height: 20px;
+	background: url(../images/close.png) no-repeat;
+	cursor: pointer;
+	position: absolute;
+	top: 2px;
+	right: 2px;
+}
+.profile_container .leftside
+{
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 150px;
+	padding: 5px;
+	text-align: center;
+	border-right: 1px solid #fff;
+}
+.profile_username
+{
+	font-weight: bold;
+}
+.profile_container .leftside .profile_avatar
+{
+	max-width: 140px;
+	max-height: 200px;
+	margin: 5px 0;
+}
+.profile_container .rightside
+{
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 160px;
+	bottom: 0;
+	right: 0;
+	padding: 1%;
+}
+.profile_container .rightside div
+{
+	padding: 10px 5px;
+	color: #777;
+	border-bottom: 1px dashed #fff;
+}
+.profile_container .rightside div strong
+{
+	color: #fff;
+}
+.profile_container .rightside input
+{
+	display: inline-block;
+	background: url(../images/transbg.png) repeat;
+	color: #fff;
+	padding: 5px;
+	font-size: 1.02em;
+
+	border: 1px solid #fff;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
