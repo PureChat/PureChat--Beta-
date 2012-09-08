@@ -51,7 +51,7 @@ this.ProfileUI = function()
 
 
 		// Fill in the right side, starting with the closing icon.
-		$('.rightside').append('<img src="' + pc_currentthemeurl + '/images/close.png" id="profile_closer" alt="" />');
+		$('.rightside').append('<img src="' + pc_currentthemeurl + '/images/fugue/24/cross.png" id="profile_closer" alt="" />');
 		$('#profile_closer').click(function()
 		{
 			profile_ui.close_window();

@@ -2,28 +2,20 @@
 {
 	display: none;
 	position: absolute;
-	top: 10px;
-	left: 10px;
-	bottom: 77px;
-	right: 280px;
+	top: 0;
+	left: 0;
+	bottom: 72px;
+	right: 256px;
 	z-index: 5;
-	color: #fff;
-	background: url(../images/transbg.png) repeat;
-
-	border: 1px solid #fff;
-    -moz-border-radius: 6px;
-    -webkit-border-radius: 6px;
-    border-radius: 6px;
+	color: #333;
+	background: url(../images/white_trans_bg.png) repeat;
 }
 #profile_closer
 {
-	width: 20px;
-	height: 20px;
-	background: url(../images/close.png) no-repeat;
 	cursor: pointer;
 	position: absolute;
-	top: 2px;
-	right: 2px;
+	top: 5px;
+	right: 5px;
 }
 .profile_container .leftside
 {
@@ -35,7 +27,7 @@
 	width: 150px;
 	padding: 5px;
 	text-align: center;
-	border-right: 1px solid #fff;
+	border-right: 1px solid #333;
 }
 .profile_username
 {
@@ -61,11 +53,11 @@
 {
 	padding: 10px 5px;
 	color: #777;
-	border-bottom: 1px dashed #fff;
+	border-bottom: 1px dashed #333;
 }
 .profile_container .rightside div strong
 {
-	color: #fff;
+	color: #333;
 }
 .profile_container .rightside input
 {
@@ -75,7 +67,7 @@
 	padding: 5px;
 	font-size: 1.02em;
 
-	border: 1px solid #fff;
+	border: 1px solid #333;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
