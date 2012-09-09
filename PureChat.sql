@@ -79,6 +79,15 @@ CREATE TABLE IF NOT EXISTS `pc_users` (
 INSERT INTO `pc_users` (`id_user`, `approved`, `user_group`, `additional_groups`, `email`, `first_name`, `last_name`, `display_name`, `password`, `password_salt`, `avatar`, `status`, `total_posts`, `user_ip`, `hostname`) VALUES
 (1, 1, 1, '', 'admin@yoursite.com', NULL, NULL, 'Admin', '777a97bd32657dbbb2da51ab0a4ef5f12b4ad129ff932648b4409b0609b9455beb8bc849aa36ef0656ebc41026c7cce3273ce1cba2aa0035f030c0956206a9be', '100_50', NULL, 'available', NULL, NULL, NULL);
 
+CREATE TABLE IF NOT EXISTS `pc_bans` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT '0',
+  `user_name` varchar(50) DEFAULT 'guest',
+  `user_ip` text,
+  `user_hostname` text,
+  PRIMARY KEY (`id`)
+);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
