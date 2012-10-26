@@ -138,7 +138,6 @@ class PureChat
         $this->smiliesurl = $this->currentthemeurl . '/images/smilies'; // Necessary?
 		$this->currentthemedir = $this->themesdir . '/' . $this->currenttheme;
 
-		
 	}
 
 	/**
