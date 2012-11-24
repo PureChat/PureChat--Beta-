@@ -41,7 +41,7 @@ class User extends PureChat
 			return false;
 		}
 
-		if (!empty($_SESSION['user']))
+		if (isset($_SESSION['user']['full_load']))
 		{
 			self::$globals['user'] = &$_SESSION['user'];
 			return true;
@@ -79,7 +79,8 @@ class User extends PureChat
 			'display_name' => $user['display_name'],
 			'avatar' => !empty($user['avatar']) ? $user['avatar'] : null,
 			'posts' => (int) $user['total_posts'],
-			'status' => (string) $user['status']
+			'status' => (string) $user['status'],
+			'full_load' => true
 		);
 		self::$globals['user'] = &$_SESSION['user'];
 	}
