@@ -35,7 +35,7 @@ class CaptchaObject extends PureChat
 	public function __construct()
 	{
 		parent::__construct();
-		self::$langmethods->load_language('captcha');
+		call_user_func(array(self::$universal, 'load_language'), 'captcha');
 	}
 	public function initalizeCaptcha($form_action, $form_id, $submit_id, $boxes = 4, $use_labels = false)
 	{

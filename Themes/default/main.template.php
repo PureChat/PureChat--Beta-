@@ -153,8 +153,12 @@ class MainTemplate extends PureChat
 					</div>
 
 					<div id="icon_container">
-						<a id="smilies_link"></a>
-						<a id="bbc_link"></a>
+						<a id="smilies_link" title="', self::$lang['smilies_title'], '" class="centertext">
+							<img src="', $this->currentthemeurl, '/images/smilies/sm_smile.png" alt="', self::$lang['smilies_title'], '" />
+						</a>
+						<a id="bbc_link" title="', self::$lang['bbc_title'], '" class="centertext">
+							<img src="', $this->currentthemeurl, '/images/T.png" alt="', self::$lang['bbc_title'], '" />
+						</a>
 					</div>
 
 					<input type="submit" id="message_submit" value="', self::$lang['post'], '" />

@@ -6,7 +6,7 @@ class Universal extends PureChat
 		parent::__construct();
 	}
 
-	public function redirect($destination=null, $type=null)
+	public function redirect($destination = null, $type = null)
 	{
 		if (!$destination)
 			return false;
@@ -34,7 +34,7 @@ class Universal extends PureChat
 	}
 	
 	// Untested and not recommended for use.
-	public function post_message($data, $chatbot=false)
+	public function post_message($data, $chatbot = false)
 	{
 		if (!self::$globals['user']['logged'])
 			return false;
@@ -64,7 +64,7 @@ class Universal extends PureChat
 		}
 	}
 	
-	public function load_source($name, $class, &$class_ref, $initial_method=null)
+	public function load_source($name, $class, &$class_ref, $initial_method = null)
 	{
 		if (empty($name) || empty($class))
 			return false;
@@ -85,7 +85,7 @@ class Universal extends PureChat
 		return true;	
 	}
 	
-	public function load_template($classes=array(), $methods=array())
+	public function load_template($classes = array(), $methods = array())
 	{
 		// Reset the array so we don't load two templates accidentally.
 		self::$globals['template'] = array();
@@ -145,10 +145,8 @@ class Universal extends PureChat
 		return false;
 	}
 
-	public function format_time($timestamp = '')
+	public function format_time($timestamp)
 	{
-		if (empty($timestamp))
-			return false;
 		$timestamp = explode(' ', $timestamp);
 		$timestamp = explode(':', $timestamp[1]);
 		if ($timestamp[0] > 12)
@@ -161,5 +159,21 @@ class Universal extends PureChat
 		if ($timestamp[0] == '00')
 			$timestamp[0] = 12;
 		return implode(':', $timestamp) . $format;
+	}
+
+	public function convert_time($return_format, $time_params)
+	{
+		// The only parameter we force.
+		if (empty($time_params['year']))
+			$time_params['year'] = date('Y');
+
+		// If the rest are all empty, return a false boolean.
+		if (empty($time_params['hour']) && empty($time_params['minute']) && empty($time_params['second']) && empty($time_params['month']) && empty($time_params['day']))
+			return false;
+
+		// Begin the formatting of our time-stamp.
+		$formatted_time = mktime($time_params['hour'], $time_params['minute'], $time_params['second'], $time_params['month'], $time_params['day'], $time_params['year']);
+		
+		return date($return_format, $formatted_time);
 	}
 }

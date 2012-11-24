@@ -142,7 +142,7 @@ class Action extends PureChat
 		if (!self::$globals['user']['logged'])
 			return false;
 
-		$last = isset($_POST['last']) ? (int)$_POST['last'] : (int)1;
+		$last = isset($_POST['last']) ? (int) $_POST['last'] : (int) 1;
         require_once($this->includesdir . '/parse.php');
         $parse = new parseObject;
 		$sql = '

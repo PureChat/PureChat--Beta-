@@ -38,7 +38,6 @@ class PureChat
 
 	// Objects.
 	protected $db;
-	static protected $langmethods;
 
 	// Global Variables.
 	protected $script;
@@ -109,8 +108,14 @@ class PureChat
 
 		// Sources = array($_GET['page'] => 'file_name.source.php');
 		$this->sources = array(
-			'admin' => 'admin.source.php',
-			'js_vars' => 'script2js.source.php'
+			'admin' => array(
+				'file' => 'admin.source.php',
+				'initial_method' => 'init'
+			),
+			'js_vars' => array(
+				'file' => 'script2js.source.php',
+				'initial_method' => 'init'
+			)
 		);
 
 		// Pages (template files) array($_GET['page'] => 'file_name.template.php');
@@ -151,15 +156,12 @@ class PureChat
 	 */
 	public function init()
 	{
-		// Load up the methods that control language files.
-		require_once($this->sourcesdir . '/language_methods.sub.source.php');
-		self::$langmethods = new LanguageMethods;
 
 		self::$globals['template'] = array();
 		self::$globals['template']['files'] = array();
 		self::$globals['template']['methods'] = array();
-		self::$globals['script_vars'] = (string)'';
- 		self::$globals['import_scripts'] = (string)'';
+		self::$globals['script_vars'] = '';
+ 		self::$globals['import_scripts'] = '';
  		self::$globals['groups'] = array();
 
 		// Load the reusable methods.
@@ -167,18 +169,13 @@ class PureChat
 		self::$universal = new Universal;
 
 		// Load the main language file.
-		self::$langmethods->load_language('main');
+		call_user_func(array(self::$universal, 'load_language'), 'main');
 
-		// What About Bob?
-		$this->load_user();
+		// Call some "self" methods.
+		$self_methods = array('load_user', 'load_sources', 'do_action', 'load_UI');
+		foreach ($self_methods as $key => $value)
+			call_user_func(array('self', $value));
 
-		// Page resources are often needed.
-		$this->load_sources();
-
-		// We better check to see if we're actually going to do something here.
-		$this->do_action();
-
-		$this->load_UI();
 	}
 
 	/**
@@ -264,11 +261,15 @@ class PureChat
 		
 		if (isset($page))
 		{
-			$file = $this->sourcesdir . '/' . $page;
+			$file = $this->sourcesdir . '/' . $page['file'];
 			require_once($file);
 			
 			$source = new Source;
-			$source->init();
+			if (empty($page['initial_method']) || !method_exists($source, $page['initial_method']))
+				$method = 'init';
+			else
+				$method = $page['initial_method'];
+			$source->$method();
 		}
 	}
 
@@ -297,7 +298,7 @@ class PureChat
 
 		$wrapper->template_top();
 		foreach (self::$globals['template']['methods'] as $method)
-			$method['object']->$method['method'](); // What teh heck?
+			call_user_func(array($method['object'], $method['method']));
 		$wrapper->template_bottom();
 	}
 }

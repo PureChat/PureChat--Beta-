@@ -39,7 +39,7 @@ class SourceMain extends PureChat
 		if (self::$globals['user']['logged'])
 		{
 			// This is important if we want the profile to work.
-			self::$langmethods->load_language('profile');
+			call_user_func(array(self::$universal, 'load_language'), 'profile');
 
             // Before load_messages, callable by AJAX.
             $this->load_smilies();

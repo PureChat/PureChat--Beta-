@@ -128,7 +128,7 @@ class Action extends PureChat
 
 		if ($success)
 		{
-			self::$langmethods->load_language('profile');
+			call_user_func(array(self::$universal, 'load_language'), 'profile');
 			
 			$return = array(
 				'status' => 'success',
@@ -147,7 +147,7 @@ class Action extends PureChat
 		if (empty($_GET['member']))
 			return false;
 
-		$member = (int)$_GET['member'];
+		$member = (int) $_GET['member'];
 
 		// !! Permissionize
 		if (!self::$globals['user']['logged'] || ($member != self::$globals['user']['id'] && !self::$globals['user']['is_admin']))

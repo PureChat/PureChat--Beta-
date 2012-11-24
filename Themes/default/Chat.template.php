@@ -78,6 +78,9 @@ class ChatTemplate extends PureChat
 				echo '
 				<li id="post_', $m['id'], '" class="chat_post">
 					<div class="message">
+						<div class="floatleft" style="width: 90%;">
+							', $m['text'], '
+						</div>
 						<div class="floatright">
 							<span id="message_timestamp_cont">
 								<em>', $m['time'], '</em>
@@ -87,7 +90,6 @@ class ChatTemplate extends PureChat
 							</span>
 							<br class="clear" />
 						</div>
-						', $m['text'], '
 						<br class="clear" />
 					</div>
 					<div class="user"><div class="message_pointer"></div>', $m['poster'], !empty($m['avatar']) ? '<img src="' . $m['avatar'] .  '" alt="" class="avatar" />' : '', '</div>

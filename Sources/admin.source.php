@@ -65,7 +65,7 @@ class Source extends PureChat
 			'home' => array(
 				'class_key' => 'admin_template',
 				'method' => 'home_content',
-				'condition' => empty($_GET['sp']) || !in_array($_GET['sp'], $subs)? true : false
+				'condition' => empty($_GET['sp']) || !in_array($_GET['sp'], $subs) ? true : false
 			),
 			'groups' => array(
 				'class_key' => 'admin_groups',

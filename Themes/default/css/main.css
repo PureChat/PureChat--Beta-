@@ -458,7 +458,7 @@ h5.page_description
 	right: 0;
 	left: 0;
 	bottom: 125px;
-	background: url(../images/online_top_grad.png) top center no-repeat;
+	background: #262628 url(../images/online_top_grad.png) top center no-repeat;
 }
 #sidebar #users_online
 {
@@ -469,13 +469,14 @@ h5.page_description
 #online_text
 {
 	display: block;
-	padding: 25px 0 0 0;
+	padding: 18px 0 0 0;
 	color: #fff;
 }
+
 #online_list ul
 {
 	display: block;
-	padding: 0 10px;
+	padding: 0 16px;
 	margin: 24px 0 0 0;
 	list-style: none;
 	text-align: left;
@@ -494,7 +495,7 @@ h5.page_description
 	bottom: 0;
 	left: 0;
 	height: 125px;
-	background: url(../images/footer_grad.png) 0 33px no-repeat;
+	background: #262628 url(../images/footer_grad.png) 0 33px no-repeat;
 }
 #footer_button_container
 {
@@ -541,7 +542,7 @@ h5.page_description
 #copyright
 {
 	position: absolute;
-	top: 22px;
+	top: 29px;
 	right: 0;
 	left: 0;
 	color: #8b8b8b;
@@ -577,7 +578,7 @@ hr.sidebar_hr
     right: 255px;
     left: 0;
     height: 72px;
-    background: url(../images/post_footer_bg.png) repeat-x
+    background: url(../images/post_footer_bg.png) repeat-x;
 }
 
 ::-webkit-scrollbar
@@ -653,7 +654,7 @@ hr.sidebar_hr
 	top: 12px;
 	right: 225px;
 	bottom: 10px;
-	left: 20px;
+	left: 38px;
 	background: url(../images/post_input_angle.png) 33px 0 no-repeat;
 }
 #message_input
@@ -703,13 +704,22 @@ hr.sidebar_hr
 	background: url(../images/footer_menu_bg_hover.png) repeat;
 }
 
+#icon_container a img
+{
+	margin-top: 14px;
+}
+#icon_container a:hover
+{
+	background: url(../images/footer_menu_bg_hover.png) repeat;	
+}
+
 #icon_container
 {
 	position: absolute;
 	top: 22px;
 	right: 120px;
 	height: 42px;
-	width: 105px;
+	width: 110px;
 	background: url(../images/input_button_bg.png) repeat;
 }
 #smilies_link
@@ -720,7 +730,7 @@ hr.sidebar_hr
 	height: 42px;
 	cursor: pointer;
 	border-right: 1px solid #13181c;
-	background: url(../images/smilies/sm_smile.png) center center no-repeat;
+	/*background: url(../images/smilies/sm_smile.png) center center no-repeat;*/
 }
 #bbc_link
 {
@@ -729,7 +739,7 @@ hr.sidebar_hr
 	width: 50%;
 	height: 42px;
 	cursor: pointer;
-	background: url(../images/T.png) center center no-repeat;
+	/*background: url(../images/T.png) center center no-repeat;*/
 }
 #irc_link
 {
