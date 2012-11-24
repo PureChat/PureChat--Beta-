@@ -32,7 +32,44 @@ class Universal extends PureChat
 		header('Location:' . $prefix . $destination);
 		exit; // I guess this is the same as returning true, eh?
 	}
-	
+
+	// Encrypt (Hash & Salt) Password(s)
+	public function encrypt_password($password)
+	{
+		// Generate two grains of salt.
+		$salt = array(
+			mt_rand(0, 1000),
+			mt_rand(0, 1000)
+		);
+
+		// Hash the password.
+		$salted['password'] = hash('sha512', $salt[0] . $password . $salt[1]);
+
+		// Imploded Grains of Salt.
+		$salted['salt_string'] = $salt[0] . '_' . $salt[1];
+
+		return $salted;
+	}
+
+	// Update User Columns
+	public function update_user($id_user, $column_updates)
+	{
+		$parameters = array();
+		$start_count = 1;
+		$column_count = count($column_updates);
+		$sql = 'UPDATE pc_users SET';
+		foreach ($column_updates as $key => $value)
+		{
+			$sql .= ' ' . $key . ' = :' . $key . ($start_count++ != $column_count ? ',' : '');
+			$parameters[':' . $key] = array($value[0], $value[1]);
+			$user_info[$key] = $value[0];
+		}
+		$parameters[':id_user'] = array($id_user, 'int');
+		$sql .= ' WHERE id_user = :id_user';
+		$this->db->query($sql, $parameters);
+		return true;
+	}
+
 	// Untested and not recommended for use.
 	public function post_message($data, $chatbot = false)
 	{

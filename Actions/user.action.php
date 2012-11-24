@@ -66,7 +66,8 @@ class Action extends PureChat
 		$params = array(
 			':username' => array(trim(htmlspecialchars($_POST['login_username'])), 'string')
 		);
-		$user_info = $this->db->get_one($sql, $params);
+		$_SESSION['user'] = $this->db->get_one($sql, $params);
+		$user_info = &$_SESSION['user'];
 
 		if (!$user_info)
 		{
@@ -82,7 +83,20 @@ class Action extends PureChat
 
 		// Re-Encrypt anything that's not already encrypted...
 		if (empty($user_info['password_salt']))
-			self::$universal->update_user($user_info['id_user'], 'password' => array($user_info['password'], 'string'));
+		{
+			$encrypted_password = self::$universal->encrypt_password($user_info['password']);
+			$update_columns = array(
+				'password' => array(
+					$encrypted_password['password'],
+					'string'
+				),
+				'password_salt' => array(
+					$encrypted_password['salt_string'],
+					'string'
+				)
+			);
+			self::$universal->update_user($user_info['id_user'], $update_columns);
+		}
 
 		$salt = explode('_', $user_info['password_salt']);
 		$dbpassword = $user_info['password'];
@@ -117,8 +131,8 @@ class Action extends PureChat
 			);
 			$this->db->query($sql, $param);
 
-			// Kill the user session variable.
-			unset($_SESSION['user_id']);
+			// Kill the user session variables.
+			unset($_SESSION['user_id'], $_SESSION['user']);
 			header('Location:' . $this->script);
 			exit();
 		}

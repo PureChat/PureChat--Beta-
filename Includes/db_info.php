@@ -30,6 +30,6 @@
 $db_info = array(
 	'host' => 'localhost',
 	'name' => 'pure-chat',
-	'username' => 'admin',
-	'password' => 'thankyou'
+	'username' => 'root',
+	'password' => ''
 );

@@ -41,6 +41,12 @@ class User extends PureChat
 			return false;
 		}
 
+		if (!empty($_SESSION['user']))
+		{
+			self::$globals['user'] = &$_SESSION['user'];
+			return true;
+		}
+
 		$sql = '
 			SELECT id_user, approved, user_group,
                 email, first_name, last_name,
@@ -58,8 +64,8 @@ class User extends PureChat
 			$this->make_guest();
 			return false;
 		}
-		
-		self::$globals['user'] = array(
+
+		$_SESSION['user'] = array(
 			'logged' => true,
 			'approved' => $user['approved'],
 			'group' => $user['user_group'],
@@ -75,6 +81,7 @@ class User extends PureChat
 			'posts' => (int) $user['total_posts'],
 			'status' => (string) $user['status']
 		);
+		self::$globals['user'] = &$_SESSION['user'];
 	}
 
 	public function get_groups()
