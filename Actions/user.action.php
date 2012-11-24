@@ -59,7 +59,8 @@ class Action extends PureChat
 		}
 
 		$sql = '
-			SELECT id_user, approved, display_name, email, password, password_salt
+			SELECT id_user, approved, display_name,
+				email, password, password_salt
 			FROM pc_users
 			WHERE display_name = :username OR email = :username';
 		$params = array(
@@ -78,6 +79,10 @@ class Action extends PureChat
 			header('Location:' . $this->script . '?error=not_activated');
 			exit;
 		}
+
+		// Re-Encrypt anything that's not already encrypted...
+		if (empty($user_info['password_salt']))
+			self::$universal->update_user($user_info['id_user'], 'password' => array($user_info['password'], 'string'));
 
 		$salt = explode('_', $user_info['password_salt']);
 		$dbpassword = $user_info['password'];
@@ -184,29 +189,24 @@ class Action extends PureChat
 				self::$globals['registration_errors'] = $errors;
 				return false;
 			}
-	
+
+			// Encrypt our password...
+			$encrypted_password = self::$universal->encrypt_password($_POST['password']);
+
 			// Otherwise we're clear for registration.
-			$salt = array(
-				mt_rand(0, 1000),
-				mt_rand(0, 1000)
-			);
-			
 			$username = $_POST['username'];
 			$email = $_POST['email'];
 			$password = $_POST['password'];
-			$password2 = $_POST['password2'];
-			$salted_password = hash('sha512', $salt[0] . $_POST['password'] . $salt[1]);
-			$salt_string = $salt[0] . '_' . $salt[1];
 	
 			$sql = '
 				INSERT INTO pc_users (approved, email, display_name, password, password_salt)
 				values (:approved, :email, :name, :pass, :salt)';
 			$params = array(
 				':approved' => array($reg_approve_var, 'int'),
-				':email' => array($_POST['email'], 'string'),
-				':name' => array($_POST['username'], 'string'),
-				':pass' => array($salted_password, 'string'),
-				':salt' => array($salt_string, 'string')
+				':email' => array($email, 'string'),
+				':name' => array($username, 'string'),
+				':pass' => array($encrypted_password['password'], 'string'),
+				':salt' => array($encrypted_password['salt_string'], 'string')
 			);
 	
 			$this->db->query($sql, $params);
