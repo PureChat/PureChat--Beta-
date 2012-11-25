@@ -27,15 +27,17 @@
  */
 
 	session_start();
-
 	error_reporting(-1);
 
-	define('PC_VERSION', 'v0.0.9 r115');
+	define('PC_VERSION', 'v0.0.9 r116');
 	define('PC_COPY', '&copy; 2012 <a href="http://purechat.org/" target="_blank">PureChat</a>');
 	
 	$_GET = array_map('stripslashes', $_GET);
 	$_POST = array_map('stripslashes', $_POST);
 	$_REQUEST = array_map('stripslashes', $_REQUEST);
+
+	if (!empty($_REQUEST['kill_session']))
+		unset($_SESSION['no_bot']);
 
 	$base_dir = dirname($_SERVER['SCRIPT_FILENAME']);
 	require_once($base_dir . '/Includes/controller.php');

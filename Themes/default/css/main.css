@@ -155,15 +155,22 @@ input.form_button
 	padding: 10px 25px;
 	color: #fff;
 	cursor: pointer;
-	background: url(../images/footer_menu_bg_hover.png) repeat-x;
+	background-color: rgba(60, 114, 180, 0.9);
+	/*background: url(../images/footer_menu_bg_hover.png) repeat-x;*/
 	border: 1px solid #1f29a5;
 	border-radius: 4px;
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 }
+input.form_button:hover
+{
+	background-color: rgba(60, 114, 180, 1.0);
+	/*background: url(../images/footer_menu_bg_hover.png) repeat-x;*/
+}
 input.form_button:disabled
 {
 	opacity: 0.6;
+	cursor: default;
 	filter: alpha(opacity=60);
 }
 
@@ -315,7 +322,7 @@ h5.page_description
 	top: 0;
 	right: 0;
 	left: 0;
-	padding: 12px 0 0 0;
+	padding: 6px 0 0 0;
 	height: 180px;
 	background: url(../images/sidebar_header.png) repeat-x;
 }
@@ -391,7 +398,8 @@ h5.page_description
 #sidebar #username
 {
 	display: block;
-	margin: 17px auto 0 auto;
+	margin: 12px auto 0 auto;
+	font-weight: bold;
 }
 #sidebar #logged_out_adviser
 {
