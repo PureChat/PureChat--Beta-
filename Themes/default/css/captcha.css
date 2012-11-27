@@ -113,3 +113,8 @@
 	margin-bottom: 4px;
 	z-index: 1;
 }
+
+.completed_image {
+	opacity: 0.2;
+	filter: alpha(opacity=20);
+}

@@ -48,10 +48,10 @@ var CaptchaUI = function()
 				snap: id_land + " img",
 				snapTolerance: 30,
 				drag: function() {
-					$(id_land + " .label").css({"font-weight": "bold"});
+					$(id_land + " .label").addClass("text_bold");
 				},
 				stop: function() {
-					$(id_land + " .label").css({"font-weight": "normal"});
+					$(id_land + " .label").removeClass("text_bold");
 				}
 			});
 
@@ -78,9 +78,9 @@ var CaptchaUI = function()
 					else if (append_last == true)
 						$("#captcha .first_column div").last().addClass("top_right");
 
-					$(id_land + " img").css({"opacity": "0.2", "filter": "alpha(opacity=20)"});
+					$(id_land + " img").addClass("completed_image");
 					$(id_land).append("<img src='" + pc_imagesurl + "/fugue/16/tick-circle.png' class='success_" + (captcha.use_labels == 1 ? 'u' : 'n') + "l' alt='' />");
-					$(id_land + " .label").css({"font-weight": "normal"});
+					$(id_land + " .label").removeClass("text_bold");
 
 					if (captcha.correct == captcha.boxes)
 					{

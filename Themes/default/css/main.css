@@ -1196,3 +1196,7 @@ span.noblock
 	width: 16px;
 	margin-left: 2px;
 }
+
+.text_bold {
+	font-weight: bold;
+}
