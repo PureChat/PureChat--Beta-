@@ -36,7 +36,6 @@ class AdminTemplate extends PureChat
 
 		$this->methods = array(
 			'main' => 'main_template',
-			'groups' => 'groups_template',
 			'settings' => 'settings_template'
 		);
 
@@ -52,7 +51,6 @@ class AdminTemplate extends PureChat
 				<ul class="tabs">
 					<li><a href="', $this->script, '">', self::$lang['page_home'], '</a></li>
 					<li><a href="', $this->script, '?page=admin">', self::$lang['page_admin'], '</a></li>
-					<li><a href="', $this->script, '?page=admin&sp=groups">', self::$lang['page_groups'], '</a></li>
 					<li><a href="', $this->script, '?page=admin&sp=settings">', self::$lang['page_settings'], '</a>
 				</ul>';
 	}

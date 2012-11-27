@@ -37,16 +37,12 @@ class Source extends PureChat
 	
 	private function load_admin_template()
 	{
-		$subs = array('settings', 'groups', 'add_ban');
+		$subs = array('settings', 'add_ban');
 
 		$files = array(
 			'admin_template' => array(
 				'file' => 'Admin',
 				'class' => 'AdminTemplate'
-			),
-			'admin_groups' => array(
-				'file' => 'Admin_Groups',
-				'class' => 'AdminGroups'
 			),
 			'admin_settings' => array(
 				'file' => 'Admin_Settings',
@@ -66,11 +62,6 @@ class Source extends PureChat
 				'class_key' => 'admin_template',
 				'method' => 'home_content',
 				'condition' => empty($_GET['sp']) || !in_array($_GET['sp'], $subs) ? true : false
-			),
-			'groups' => array(
-				'class_key' => 'admin_groups',
-				'method' => 'content',
-				'condition' => !empty($_GET['sp']) && $_GET['sp'] == 'groups' ? true : false
 			),
 			'settings' => array(
 				'class_key' => 'admin_settings',
