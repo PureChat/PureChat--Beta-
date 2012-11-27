@@ -13,6 +13,7 @@ var pc_script = \'', $this->script, '\';
 var pc_last_message = parseInt(', isset(self::$globals['last_message']) ? self::$globals['last_message'] : 1, ');
 var pc_currentthemeurl = \'', $this->currentthemeurl, '\';
 var pc_themesurl = \'', $this->themesurl, '/default\';
+var pc_imagesurl = pc_themesurl + \'/images\'; 
 var pc_username = \'', self::$globals['user']['display_name'], '\';
 var pc_user_id = parseInt(', self::$globals['user']['id'], ');
 var pc_display_name = "', self::$globals['user']['display_name'], '";

@@ -30,20 +30,21 @@ class CaptchaObject extends PureChat
 {
 	public $form_action, $form_id, $submit_id;
 	public $boxes, $use_labels, $images;
-	public $template, $vars;
-	public $randomCaptcha, $captchaSecondRow;
+	public $template, $vars, $total_width;
+	public $random_captcha, $second_row;
 	public function __construct()
 	{
 		parent::__construct();
 		call_user_func(array(self::$universal, 'load_language'), 'captcha');
 	}
-	public function initalizeCaptcha($form_action, $form_id, $submit_id, $boxes = 4, $use_labels = false)
+	public function initalize_captcha($form_action, $form_id, $submit_id, $boxes = 4, $use_labels = false)
 	{
 		$this->form_action = $form_action;
 		$this->form_id = $form_id;
 		$this->submit_id = $submit_id;
 		$this->boxes = $boxes;
 		$this->use_labels = $use_labels;
+		$this->total_width = $this->boxes * 15;
 		$this->images = array(
 			array(
 				'url' => 'address-book',
@@ -590,49 +591,45 @@ class CaptchaObject extends PureChat
 			)
 		);
 
-		// Some useful variables.
-		$this->vars = array(
-			'total_images' => (count($this->images) - 1),
-			'calculated_width' => round(133.33 * $this->boxes + ($this->boxes * 6)) . 'px'
-		);
-
 		// Generate the first row, randomly.
-		$this->randomCaptcha = array();
+		$this->random_captcha = array();
+		$this->used_keys = array();
 		for ($count = 1; $count <= $this->boxes; $count++)
 		{
 			do {
-				$key = mt_rand(0, ($this->vars['total_images']));
-			} while (array_key_exists($key, $this->randomCaptcha));
-			$this->randomCaptcha[] = $this->images[$key];
+				$key = mt_rand(0, ((count($this->images) - 1)));
+			} while (array_key_exists($key, $this->used_keys));
+			$this->random_captcha[] = $this->images[$key];
+			$this->used_keys[$key] = true;
 		}
 
 		// Start to figure out the second row, which is scrambled.
-		$usableCaptchaImages = $this->randomCaptcha;
-		$lastCaptchaImage = (count($usableCaptchaImages) - 1);
+		$usable_captcha_images = $this->random_captcha;
+		$last_captcha_image = (count($usable_captcha_images) - 1);
 		for ($count = 1; $count <= $this->boxes; $count++)
 		{
-			if (count($usableCaptchaImages) > 1)
+			if (count($usable_captcha_images) > 1)
 			{
 				do {
-					$key = mt_rand(0, ($lastCaptchaImage));
-				} while (!array_key_exists($key, $usableCaptchaImages));
+					$key = mt_rand(0, ($last_captcha_image));
+				} while (!array_key_exists($key, $usable_captcha_images));
 			}
 			else
 			{
 				$key = 0;
-				while (!array_key_exists($key, $usableCaptchaImages))
+				while (!array_key_exists($key, $usable_captcha_images))
 					$key++;
 			}
-			$this->captchaSecondRow[$key] = $this->randomCaptcha[$key];
-			unset($usableCaptchaImages[$key]);
+			$this->second_row[$key] = $this->random_captcha[$key];
+			unset($usable_captcha_images[$key]);
 		}
-		foreach (array_keys($this->captchaSecondRow) as $key => $value)
+		foreach (array_keys($this->second_row) as $key => $value)
 		{
 			if ($key === $value)
 				$identical[] = true;
 		}
 		if (isset($identical) && count($identical) == $this->boxes)
-			$this->captchaSecondRow = array_reverse($this->captchaSecondRow);
+			$this->second_row = array_reverse($this->second_row, true);
 
 		// CSS
 		self::$globals['import_scripts'] .= '
@@ -645,21 +642,40 @@ class CaptchaObject extends PureChat
 		<script type="text/javascript" src="' . $this->currentthemeurl . '/scripts/captcha.ui.js"></script>';
 
 		self::$globals['script_vars'] .= '
-			var captchaCorrect = 0;
-			var captcha_submit_id = \'' . $this->submit_id . '\';
-			var captchaWidth = \'' . $this->vars['calculated_width'] . '\';
-			var form_id = \'' . $this->form_id . '\';
-			var form_action = \'' . $this->form_action . '\';
-			var submit_id = \'' . $this->submit_id . '\';
-			var boxes = \'' . $this->boxes . '\';
-			var captchaRandom = ' . json_encode($this->randomCaptcha) . ';
-			var captchaSecondRow = ' . json_encode($this->captchaSecondRow) . ';
+			captcha = {
+				correct: 0,
+				boxes: ' . $this->boxes . ',
+				use_labels: ' . (!empty($this->use_labels) ? 1 : 0) . ',
+				full_width: ' . $this->boxes * 15 . ',
+				total_width: ' . $this->total_width . ',
+				submit_id: \'' . $this->submit_id . '\',
+				form_id: \'' . $this->form_id . '\',
+				form_action: \'' . $this->form_action . '\',
+				submit_id: \'' . $this->submit_id . '\',
+				random: ' . json_encode($this->random_captcha) . ',
+				second_row: ' . json_encode($this->second_row) . ',
+			};
 		';
 
+		if ($this->total_width < 100)
+		{
+			self::$globals['import_scripts'] .= '
+				<style type="text/css">
+					#captcha .first_column, #captcha .second_column {
+						margin-left: ' . (((100 - $this->total_width) / 2) + 5) . '%;
+					}
+				</style>
+			';
+		}
+
 		// Throw them in the scope.
-		self::$globals['captchaRandom'] = $this->randomCaptcha;
-		self::$globals['captchaSecondRow'] = $this->captchaSecondRow;
-		self::$globals['use_labels'] = $this->use_labels;
+		self::$globals['captcha'] = array(
+			'random' => $this->random_captcha,
+			'second_row' => $this->second_row,
+			'use_labels' => $this->use_labels,
+			'box_count' => $this->boxes,
+			'total_width' => $this->total_width
+		);
 
 		require_once($this->currentthemedir . '/Captcha.template.php');
 		$this->template = new CaptchaTemplate;

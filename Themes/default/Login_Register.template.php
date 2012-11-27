@@ -36,7 +36,7 @@ class LoginRegister extends PureChat
 		{
 			require_once($this->includesdir . '/captcha.php');
 			$this->reg_captcha = new CaptchaObject;
-			$this->reg_captcha->initalizeCaptcha($this->script . '?action=user&perform=register', 'reg_form', 'registration_submit');
+			$this->reg_captcha->initalize_captcha($this->script . '?action=user&perform=register', 'reg_form', 'registration_submit', 4, true);
 		}
 	
 		self::$globals['script_vars'] .= '

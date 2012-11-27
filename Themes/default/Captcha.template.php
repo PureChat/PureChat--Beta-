@@ -36,35 +36,37 @@ class CaptchaTemplate extends PureChat
 	public function output()
 	{
 		echo '
-			<div class="centertext">
+			<div id="captcha_cont">
 				<strong>', self::$lang['captcha_title'], '</strong>
-				<span id="captcha_desc">', self::$lang['captcha_desc'], '</span>
 				<br />
-				<!-- The padding should be 6px + 2 * number of images -->
-				<div id="captchaBounds" style="width: 100%;">
-					<div id="captchaStart" class="captchaBox captchaRound">';
-					foreach (self::$globals['captchaRandom'] as $key => $value)
+				<span id="captcha_desc">', self::$lang['captcha_desc'], '</span>
+				<div id="captcha">
+					<div class="upper_space first_column">';
+					$current_item = 0;
+					foreach (self::$globals['captcha']['random'] as $key => $value)
 					{
 						echo '
-							<div class="captchaTile captchaRound captchaStart centertext" id="tile_', ($key + 1), '">
-								<img src="', $this->currentthemeurl, '/images/fugue/24/', $value['url'], '.png" alt="*" />
-								', self::$globals['use_labels'] == true ? '<span class="captchaLabel">' . $value['title'] . '</span>' : '', '
+							<div id="tile_', ($key + 1), '" class="start centertext' , $current_item != 0 ? ' middle' : '', $current_item == 0 && self::$globals['captcha']['box_count'] == 1 ? ' top_left top_right' : ($current_item == 0 ? ' top_left' : ($current_item + 1 == self::$globals['captcha']['box_count'] ? ' top_right' : '')), '">
+								<img src="', $this->currentthemeurl, '/images/fugue/24/', $value['url'], '.png" alt="', $value['title'], '" title="', $value['title'], '" />
+								', self::$globals['captcha']['use_labels'] == true ? '<span class="label">' . $value['title'] . '</span>' : '', '
 							</div>
 						';
+						++$current_item;
 					}
 					echo '
 						<br class="clear" />
 					</div>
-					<br /><br />
-					<div id="captchaFinish" class="captchaBox captchaRound">';
-					foreach (self::$globals['captchaSecondRow'] as $key => $value)
+					<div class="second_column">';
+					$current_item = 0;
+					foreach (self::$globals['captcha']['second_row'] as $key => $value)
 					{
 						echo '
-							<div class="captchaTile captchaRound captchaLanding droppable centertext" id="landing_', ($key + 1), '">
-								<img src="', $this->currentthemeurl, '/images/fugue/24/', $value['url'], '.png" alt="*" />
-								', self::$globals['use_labels'] == true ? '<span class="captchaLabel">' . $value['title'] . '</span>' : '', '
+							<div id="landing_', ($key + 1), '" class="landing droppable centertext' , $current_item != 0 ? ' middle' : '', $current_item == 0 && self::$globals['captcha']['box_count'] == 1 ? ' bottom_left bottom_right' : ($current_item == 0 ? ' bottom_left' : ($current_item + 1 == self::$globals['captcha']['box_count'] ? ' bottom_right' : '')), '">
+								<img src="', $this->currentthemeurl, '/images/fugue/24/', $value['url'], '.png" alt="', $value['title'], '" title="', $value['title'], '" />
+								', self::$globals['captcha']['use_labels'] == true ? '<span class="label">' . $value['title'] . '</span>' : '', '
 							</div>
 						';
+						++$current_item;
 					}
 					echo '
 						<br class="clear" />
