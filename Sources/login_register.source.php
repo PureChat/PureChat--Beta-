@@ -1,11 +1,6 @@
 <?php
 class GuestSource extends PureChat
 {
-	public function __construct()
-	{
-		parent::__construct();
-	}
-
 	public function init()
 	{
 		$class = array(

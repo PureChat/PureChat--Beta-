@@ -28,11 +28,6 @@
 
 class User extends PureChat
 {
-	public function __construct()
-	{
-		parent::__construct();
-	}
-
 	public function load_user_info()
 	{
 		if (!isset($_SESSION['user_id']))
@@ -49,8 +44,8 @@ class User extends PureChat
 
 		$sql = '
 			SELECT id_user, approved, user_group,
-                email, first_name, last_name,
-                display_name, avatar, total_posts, status
+				email, first_name, last_name,
+				display_name, avatar, total_posts, status
 			FROM pc_users
 			WHERE id_user = :user_id';
 		$parameters = array(
