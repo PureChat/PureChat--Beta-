@@ -1,2 +1,2 @@
 <?php
-die('Yo');
+die('Yo'); // LOL

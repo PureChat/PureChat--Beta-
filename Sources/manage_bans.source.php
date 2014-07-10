@@ -1,11 +1,6 @@
 <?php
 class ManageBanSource extends PureChat
 {
-	public function __construct()
-	{
-		parent::__construct();
-	}
-	
 	public function init()
 	{
 		self::$universal->load_language('manage_bans');

@@ -1,11 +1,6 @@
 <?php
 class Source extends PureChat
 {
-	public function __construct()
-	{
-		parent::__construct();
-	}
-
 	public function init()
 	{
 		if (!self::$globals['user']['is_admin'])
@@ -21,7 +16,7 @@ class Source extends PureChat
 		if (empty($_GET['sp']))
 			return false;
 		
-		$sub_source;
+		$sub_source; // What the heck is this doing?
 		switch ($_GET['sp'])
 		{
 			case 'add_ban':

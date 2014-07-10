@@ -1,11 +1,6 @@
 <?php
 class Universal extends PureChat
 {
-	public function __construct()
-	{
-		parent::__construct();
-	}
-
 	public function redirect($destination = null, $type = null)
 	{
 		if (!$destination)
