@@ -31,74 +31,63 @@ class SourceMain extends PureChat
 	public function __construct()
 	{
 		parent::__construct();
+		require_once($this->includesdir . '/parse.php');
+		$this->parser = new parseObject;
 	}
 
 	public function init()
 	{
 		// Please don't smile at the strangers.
-		if (self::$globals['user']['logged'])
-		{
-			// This is important if we want the profile to work.
-			call_user_func(array(self::$universal, 'load_language'), 'profile');
-
-            // Before load_messages, callable by AJAX.
-            $this->load_smilies();
-			$this->load_bbc_list();
-			$this->load_irc_list();
-
-			// This should speed things up a little.
-			// And yes, I'd like to keep two conditions so we can load things on ajax requests later.
-			if (!self::$globals['ajax'])
-			{
-				$this->load_messages();
-			}
-
-			$class = array(
-			'chat_template' => array(
-				'file' => 'Chat',
-				'class' => 'ChatTemplate'
-			)
-			);
-			$method = array(
-				'content_layer' => array(
-					'class_key' => 'chat_template', // The index of the class array.
-					'method' => 'content'
-				),
-			);
-			self::$universal->load_template($class, $method);
+		if (!self::$globals['user']['logged']) {
+			return;
 		}
+		self::$universal->load_language('profile');
+		$this->load_smilies();
+		$this->load_bbc_list();
+		$this->load_irc_list();
+		$this->load_messages();
+		$this->load_template();
 	}
 
 	private function load_messages()
 	{
-        require_once($this->includesdir . '/parse.php');
-        $parse = new parseObject;
-		$sql = '
+		self::$globals['messages'] = array();
+		self::$globals['last_message'] = 0;
+		
+		if (self::$globals['ajax']) {
+			return;
+		}
+			
+		$messages = $this->db->get_all('
 			SELECT msg.id, msg.poster,
 				msg.text, msg.time,
                 usr.display_name, usr.avatar
 			FROM pc_messages AS msg
 			LEFT JOIN pc_users AS usr
 				ON (msg.poster = usr.id_user)
-			ORDER BY msg.id DESC';
-		$q = $this->db->get_all($sql);
+			ORDER BY msg.id ASC'
+		);
 
-		if (!$q)
-		{
-			// If there's no real messages, still define the varables just to kill errors.
-			self::$globals['messages'] = array();
-
-			$last = (int)0; // Not boolean (that's important)
-			self::$globals['last_message'] = $last;
-
-			return false;
+		if (!$messages) {
+			return;
 		}
 
-		foreach ($q as $message)
+		$this->update_post_information($messages);		
+	}
+	
+	private function update_post_information($messages)
+	{
+		$this->format_messages($messages);
+		$this->set_last_id();
+	}
+	
+	private function format_messages($messages)
+	{
+		foreach ($messages as $message)
 		{
-            $message['text'] = $parse->smileys($parse->bbc($message['text'], $message['display_name']), $message['display_name']);
+			$message['text'] = $this->parser->smileys($this->parser->bbc($message['text'], $message['display_name']), $message['display_name']);
 			self::$globals['messages'][] = array(
-				'id' => $message['id'],
+				'id' => (int) $message['id'],
 				'poster' => $message['display_name'],
 				'id_poster' => $message['poster'],
 				'text' => $message['text'],
@@ -106,85 +95,98 @@ class SourceMain extends PureChat
 				'avatar' => $message['avatar']
 			);
 		}
-
-		// Change it up.
-		self::$globals['messages'] = array_reverse(self::$globals['messages']);
-
-		// Get the id of the last message.
+	}
+	
+	private function set_last_id() {
 		$last = end(self::$globals['messages']);
-		$last = $last['id'];
-		self::$globals['last_message'] = (int)$last;
+		self::$globals['last_message'] = $last['id'];
+	}
+	
+	private function load_template()
+	{
+		$class = array(
+			'chat_template' => array(
+				'file' => 'Chat',
+				'class' => 'ChatTemplate'
+			)
+		);
+		$method = array(
+			'content_layer' => array(
+				'class_key' => 'chat_template', // The index of the class array.
+				'method' => 'content'
+			)
+		);
+		self::$universal->load_template($class, $method);
 	}
 
 	private function load_smilies()
 	{
-		$smilies = array(
+		self::$globals['smilies'] = array(
 			0 => array(
 				'name' => self::$lang['sm_smile'],
 				'id' => 'smile',
 				'code' => ':)',
 				'img' => $this->smiliesurl . '/sm_smile.png',
-                'case' => 'i',
-                'enabled' => true
+				'case' => 'i',
+				'enabled' => true
 			),
 			1 => array(
 				'name' => PureChat::$lang['sm_frown'],
 				'id' => 'frown',
 				'code' => ':(',
 				'img' => $this->smiliesurl . '/sm_frown.png',
-                'case' => 'i',
-                'enabled' => true
+				'case' => 'i',
+				'enabled' => true
 			),
 			2 => array(
 				'name' => self::$lang['sm_glare'],
 				'id' => 'glare',
 				'code' => ':mad',
 				'img' => $this->smiliesurl . '/sm_glare.png',
-                'case' => 'i',
-                'enabled' => true
+				'case' => 'i',
+				'enabled' => true
 			),
 			3 => array(
 				'name' => self::$lang['sm_neutral'],
 				'id' => 'neutral',
 				'code' => ':|',
 				'img' => $this->smiliesurl . '/sm_neutral.png',
-                'case' => 'i',
-                'enabled' => true
+				'case' => 'i',
+				'enabled' => true
 			),
 			4 => array(
 				'name' => self::$lang['sm_wink'],
 				'id' => 'wink',
 				'code' => ';)',
 				'img' => $this->smiliesurl . '/sm_wink.png',
-                'case' => 'i',
-                'enabled' => true
+				'case' => 'i',
+				'enabled' => true
 			),
 			5 => array(
 				'name' => self::$lang['sm_oh'],
 				'id' => 'oh',
 				'code' => ':O',
 				'img' => $this->smiliesurl . '/sm_oh.png',
-                'case' => 'i',
-                'enabled' => true
+				'case' => 'i',
+ 				'enabled' => true
 			),
 			6 => array(
 				'name' => self::$lang['sm_tongue'],
 				'id' => 'tongue',
 				'code' => ':P',
 				'img' => $this->smiliesurl . '/sm_tongue.png',
-                'case' => 'i',
-                'enabled' => true
+				'case' => 'i',
+				'enabled' => true
 			),
 			7 => array(
 				'name' => self::$lang['sm_dead'],
 				'id' => 'dead',
 				'code' => 'X.X',
 				'img' => $this->smiliesurl . '/sm_dead.png',
-                'case' => 'i',
-                'enabled' => true
+				'case' => 'i',
+				'enabled' => true
 			)
 		);
-        self::$globals['smilies'] = $smilies;
 	}
 
 	private function load_bbc_list()
@@ -240,7 +242,7 @@ class SourceMain extends PureChat
 
 	private function load_irc_list()
 	{
-		$irc = array(
+		self::$globals['irc_commands'] = array(
 			0 => array(
 				'name' => self::$lang['available'],
 				'id' => 'irc_available',
@@ -272,7 +274,5 @@ class SourceMain extends PureChat
 				'img' => $this->currentthemeurl . '/images/leave.png',
 			)
 		);
-
-		self::$globals['irc_commands'] = $irc;
 	}
 }
