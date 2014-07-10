@@ -31,8 +31,7 @@ class SourceMain extends PureChat
 	public function __construct()
 	{
 		parent::__construct();
-		require_once($this->includesdir . '/parse.php');
-		$this->parser = new parseObject;
+		require_once($this->includesdir . '/MessageParser.php');
 	}
 
 	public function init()
@@ -43,7 +42,6 @@ class SourceMain extends PureChat
 		}
 		self::$universal->load_language('profile');
 		$this->load_smilies();
-		$this->load_bbc_list();
 		$this->load_irc_list();
 		$this->load_messages();
 		$this->load_template();
@@ -85,14 +83,19 @@ class SourceMain extends PureChat
 	{
 		foreach ($messages as $message)
 		{
-			$message['text'] = $this->parser->smileys($this->parser->bbc($message['text'], $message['display_name']), $message['display_name']);
+			$this->parse = new MessageParser($message['text'], $message['display_name']);
+			$this->parse->formatVulgar();
+			$this->parse->formatText();
+			$this->parse->formatSmileys();
+			$message['text'] = $this->parse->getMessage();
+
 			self::$globals['messages'][] = array(
 				'id' => (int) $message['id'],
 				'poster' => $message['display_name'],
 				'id_poster' => $message['poster'],
 				'text' => $message['text'],
 				'time' => self::$universal->format_time($message['time']),
-				'avatar' => $message['avatar']
+				'avatar' => $message['avatar'],
 			);
 		}
 	}
@@ -107,14 +110,14 @@ class SourceMain extends PureChat
 		$class = array(
 			'chat_template' => array(
 				'file' => 'Chat',
-				'class' => 'ChatTemplate'
-			)
+				'class' => 'ChatTemplate',
+			),
 		);
 		$method = array(
 			'content_layer' => array(
 				'class_key' => 'chat_template', // The index of the class array.
-				'method' => 'content'
-			)
+				'method' => 'content',
+			),
 		);
 		self::$universal->load_template($class, $method);
 	}
@@ -128,7 +131,7 @@ class SourceMain extends PureChat
 				'code' => ':)',
 				'img' => $this->smiliesurl . '/sm_smile.png',
 				'case' => 'i',
-				'enabled' => true
+				'enabled' => true,
 			),
 			1 => array(
 				'name' => PureChat::$lang['sm_frown'],
@@ -136,7 +139,7 @@ class SourceMain extends PureChat
 				'code' => ':(',
 				'img' => $this->smiliesurl . '/sm_frown.png',
 				'case' => 'i',
-				'enabled' => true
+				'enabled' => true,
 			),
 			2 => array(
 				'name' => self::$lang['sm_glare'],
@@ -144,7 +147,7 @@ class SourceMain extends PureChat
 				'code' => ':mad',
 				'img' => $this->smiliesurl . '/sm_glare.png',
 				'case' => 'i',
-				'enabled' => true
+				'enabled' => true,
 			),
 			3 => array(
 				'name' => self::$lang['sm_neutral'],
@@ -152,7 +155,7 @@ class SourceMain extends PureChat
 				'code' => ':|',
 				'img' => $this->smiliesurl . '/sm_neutral.png',
 				'case' => 'i',
-				'enabled' => true
+				'enabled' => true,
 			),
 			4 => array(
 				'name' => self::$lang['sm_wink'],
@@ -160,7 +163,7 @@ class SourceMain extends PureChat
 				'code' => ';)',
 				'img' => $this->smiliesurl . '/sm_wink.png',
 				'case' => 'i',
-				'enabled' => true
+				'enabled' => true,
 			),
 			5 => array(
 				'name' => self::$lang['sm_oh'],
@@ -168,7 +171,7 @@ class SourceMain extends PureChat
 				'code' => ':O',
 				'img' => $this->smiliesurl . '/sm_oh.png',
 				'case' => 'i',
- 				'enabled' => true
+ 				'enabled' => true,
 			),
 			6 => array(
 				'name' => self::$lang['sm_tongue'],
@@ -176,7 +179,7 @@ class SourceMain extends PureChat
 				'code' => ':P',
 				'img' => $this->smiliesurl . '/sm_tongue.png',
 				'case' => 'i',
-				'enabled' => true
+				'enabled' => true,
 			),
 			7 => array(
 				'name' => self::$lang['sm_dead'],
@@ -184,59 +187,8 @@ class SourceMain extends PureChat
 				'code' => 'X.X',
 				'img' => $this->smiliesurl . '/sm_dead.png',
 				'case' => 'i',
-				'enabled' => true
-			)
-		);
-	}
-
-	private function load_bbc_list()
-	{
-		self::$globals['bbc_list'] = array(
-			0 => array(
-				'name' => self::$lang['bbc']['bold'],
-				'id' => 'bold',
-				'code' => '[b] {text} [/b]'
+				'enabled' => true,
 			),
-			1 => array(
-				'name' => self::$lang['bbc']['italic'],
-				'id' => 'italic',
-				'code' => '[i] {text} [/i]'
-			),
-			2 => array(
-				'name' => self::$lang['bbc']['strike'],
-				'id' => 'strike',
-				'code' => '[s] {text} [/s]'
-			),
-			3 => array(
-				'name' => self::$lang['bbc']['underline'],
-				'id' => 'underline',
-				'code' => '[u] {text} [/u]'
-			),
-			4 => array(
-				'name' => self::$lang['bbc']['color'],
-				'id' => 'color',
-				'code' => '[color={input}] {text} [/color]'
-			),
-			5 => array(
-				'name' => self::$lang['bbc']['font'],
-				'id' => 'font',
-				'code' => '[font={input}] {text} [/font]'
-			),
-			6 => array(
-				'name' => self::$lang['bbc']['size'],
-				'id' => 'size',
-				'code' => '[size={input}] {text} [size]'
-			),
-			7 => array(
-				'name' => self::$lang['bbc']['html'],
-				'id' => 'html',
-				'code' => '[html] {text} [/html]'
-			),
-			8 => array(
-				'name' => self::$lang['bbc']['glow'],
-				'id' => 'glow',
-				'code' => '[glow color={input}] {text} [/glow]'
-			)
 		);
 	}
 
@@ -247,32 +199,32 @@ class SourceMain extends PureChat
 				'name' => self::$lang['available'],
 				'id' => 'irc_available',
 				'img' => $this->currentthemeurl . '/images/available.png',
-				'command' => '/available'
+				'command' => '/available',
 			),
 			1 => array(
 				'name' => self::$lang['busy'],
 				'id' => 'irc_busy',
 				'img' => $this->currentthemeurl . '/images/busy.png',
-				'command' => '/busy'
+				'command' => '/busy',
 			),
 			2 => array(
 				'name' => self::$lang['away'],
 				'id' => 'irc_away',
 				'img' => $this->currentthemeurl . '/images/away.png',
-				'command' => '/away'
+				'command' => '/away',
 			),
 			3 => array(
 				'name' => self::$lang['invisible'],
 				'id' => 'irc_invisible',
 				'img' => $this->currentthemeurl . '/images/invisible.png',
-				'command' => '/invisible'
+				'command' => '/invisible',
 			),
 			4 => array(
 				'name' => self::$lang['logout'],
 				'id' => 'irc_leave',
 				'command' => '/quit',
 				'img' => $this->currentthemeurl . '/images/leave.png',
-			)
+			),
 		);
 	}
 }
