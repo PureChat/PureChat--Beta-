@@ -32,7 +32,7 @@ class SourceMain extends PureChat
 	{
 		parent::__construct();
 		require_once($this->includesdir . '/parse.php');
-        $this->parser = new parseObject;
+		$this->parser = new parseObject;
 	}
 
 	public function init()
@@ -85,7 +85,7 @@ class SourceMain extends PureChat
 	{
 		foreach ($messages as $message)
 		{
-            $message['text'] = $this->parser->smileys($this->parser->bbc($message['text'], $message['display_name']), $message['display_name']);
+			$message['text'] = $this->parser->smileys($this->parser->bbc($message['text'], $message['display_name']), $message['display_name']);
 			self::$globals['messages'][] = array(
 				'id' => (int) $message['id'],
 				'poster' => $message['display_name'],
@@ -127,64 +127,64 @@ class SourceMain extends PureChat
 				'id' => 'smile',
 				'code' => ':)',
 				'img' => $this->smiliesurl . '/sm_smile.png',
-                'case' => 'i',
-                'enabled' => true
+				'case' => 'i',
+				'enabled' => true
 			),
 			1 => array(
 				'name' => PureChat::$lang['sm_frown'],
 				'id' => 'frown',
 				'code' => ':(',
 				'img' => $this->smiliesurl . '/sm_frown.png',
-                'case' => 'i',
-                'enabled' => true
+				'case' => 'i',
+				'enabled' => true
 			),
 			2 => array(
 				'name' => self::$lang['sm_glare'],
 				'id' => 'glare',
 				'code' => ':mad',
 				'img' => $this->smiliesurl . '/sm_glare.png',
-                'case' => 'i',
-                'enabled' => true
+				'case' => 'i',
+				'enabled' => true
 			),
 			3 => array(
 				'name' => self::$lang['sm_neutral'],
 				'id' => 'neutral',
 				'code' => ':|',
 				'img' => $this->smiliesurl . '/sm_neutral.png',
-                'case' => 'i',
-                'enabled' => true
+				'case' => 'i',
+				'enabled' => true
 			),
 			4 => array(
 				'name' => self::$lang['sm_wink'],
 				'id' => 'wink',
 				'code' => ';)',
 				'img' => $this->smiliesurl . '/sm_wink.png',
-                'case' => 'i',
-                'enabled' => true
+				'case' => 'i',
+				'enabled' => true
 			),
 			5 => array(
 				'name' => self::$lang['sm_oh'],
 				'id' => 'oh',
 				'code' => ':O',
 				'img' => $this->smiliesurl . '/sm_oh.png',
-                'case' => 'i',
-                'enabled' => true
+				'case' => 'i',
+ 				'enabled' => true
 			),
 			6 => array(
 				'name' => self::$lang['sm_tongue'],
 				'id' => 'tongue',
 				'code' => ':P',
 				'img' => $this->smiliesurl . '/sm_tongue.png',
-                'case' => 'i',
-                'enabled' => true
+				'case' => 'i',
+				'enabled' => true
 			),
 			7 => array(
 				'name' => self::$lang['sm_dead'],
 				'id' => 'dead',
 				'code' => 'X.X',
 				'img' => $this->smiliesurl . '/sm_dead.png',
-                'case' => 'i',
-                'enabled' => true
+				'case' => 'i',
+				'enabled' => true
 			)
 		);
 	}
