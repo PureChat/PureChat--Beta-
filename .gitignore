@@ -162,14 +162,8 @@ pip-log.txt
 # Mac crap
 .DS_Store
 
-Attachments/avatars/047c70603ba48b4d1074b501e6bb72d8.jpeg
+Includes/db_info.php
 
 Includes/db_info.php
 
-Attachments/avatars/47de9da351c1815e10e2351b2c5b85bc.jpeg
-
-Attachments/avatars/6a4d9f935700318cffb13db6c7420463.jpeg
-
-Attachments/avatars/79480cd012272d4f859e58c3583310ed.png
-
-Includes/db_info.php
+Attachments/avatars/*
