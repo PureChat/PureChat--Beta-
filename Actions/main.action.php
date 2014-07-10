@@ -28,11 +28,6 @@
 
 class MainAction extends PureChat
 {
-	public function __construct()
-	{
-		parent::__construct();
-	}
-
 	public function init()
 	{
 		// We don't need to do this every time someone posts a new message or something.

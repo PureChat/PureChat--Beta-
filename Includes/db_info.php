@@ -29,7 +29,7 @@
 // If you don't know what this is, someone is in trouble... And it isn't the developers.
 $db_info = array(
 	'host' => 'localhost',
-	'name' => 'pure-chat',
+	'name' => 'purechat',
 	'username' => 'root',
 	'password' => ''
 );
