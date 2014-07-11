@@ -36,7 +36,7 @@ class MainTemplate extends PureChat
 	protected function template_top()
 	{
 		echo '<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 	<head>
 		<title> PureChat </title>
 		<meta charset="utf-8" />

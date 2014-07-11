@@ -30,7 +30,7 @@
 	error_reporting(-1);
 
 	define('PC_VERSION', 'v0.0.9 r120');
-	define('PC_COPY', '&copy; 2012 <a href="http://purechat.org/" target="_blank">PureChat</a>');
+	define('PC_COPY', '&copy; 2012-2014 <a href="http://purechat.org/" target="_blank">PureChat</a>');
 	
 	$_GET = array_map('stripslashes', $_GET);
 	$_POST = array_map('stripslashes', $_POST);
