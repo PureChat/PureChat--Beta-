@@ -30,7 +30,6 @@ var PureChatSource = function()
 
 	this.post_new = function()
 	{
-		alert("test");
 		var message = $('#message_input').val();
 		chat_ui.clear_field();
 
@@ -126,9 +125,9 @@ var PureChatSource = function()
 	{
 		if (!ajax_in_progress)
 		{
-			if (callback != null)
+			if (callback != null) {
 				callback();
-
+			}
 			return false;
 		}
 		else if (ajax_in_progress)
