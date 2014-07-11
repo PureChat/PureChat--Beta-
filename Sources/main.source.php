@@ -16,12 +16,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * PureChat is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with PureChat.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -51,11 +51,11 @@ class SourceMain extends PureChat
 	{
 		PureChat::$globals['messages'] = array();
 		PureChat::$globals['last_message'] = 0;
-		
+
 		if (PureChat::$globals['ajax']) {
 			return;
 		}
-			
+
 		$messages = $this->db->get_all('
 			SELECT msg.id, msg.poster,
 				msg.text, msg.time,
@@ -70,51 +70,41 @@ class SourceMain extends PureChat
 			return;
 		}
 
-		$this->update_post_information($messages);		
+		$this->update_post_information($messages);
 	}
-	
+
 	private function update_post_information($messages)
 	{
 		$this->format_messages($messages);
 		$this->set_last_id();
 	}
-	
+
 	private function format_messages($messages)
 	{
 		foreach ($messages as $message)
 		{
-<<<<<<< HEAD
 			$this->parse = new MessageParser($message['text'], $message['display_name']);
 			$this->parse->formatVulgar();
 			$this->parse->formatText();
 			$this->parse->formatSmileys();
 			$message['text'] = $this->parse->getMessage();
 
-			self::$globals['messages'][] = array(
-=======
-			$message['text'] = $this->parser->smileys($this->parser->bbc($message['text'], $message['display_name']), $message['display_name']);
 			PureChat::$globals['messages'][] = array(
->>>>>>> 47b675df0bdda51f769dba598403181097fabcfd
 				'id' => (int) $message['id'],
 				'poster' => $message['display_name'],
 				'id_poster' => $message['poster'],
 				'text' => $message['text'],
-<<<<<<< HEAD
-				'time' => self::$universal->format_time($message['time']),
-				'avatar' => $message['avatar'],
-=======
 				'time' => PureChat::$universal->format_time($message['time']),
-				'avatar' => $message['avatar']
->>>>>>> 47b675df0bdda51f769dba598403181097fabcfd
+				'avatar' => $message['avatar'],
 			);
 		}
 	}
-	
+
 	private function set_last_id() {
 		$last = end(PureChat::$globals['messages']);
 		PureChat::$globals['last_message'] = $last['id'];
 	}
-	
+
 	private function load_template()
 	{
 		$class = array(
@@ -181,7 +171,7 @@ class SourceMain extends PureChat
 				'code' => ':O',
 				'img' => $this->smiliesurl . '/sm_oh.png',
 				'case' => 'i',
- 				'enabled' => true,
+				'enabled' => true,
 			),
 			6 => array(
 				'name' => PureChat::$lang['sm_tongue'],
@@ -197,64 +187,8 @@ class SourceMain extends PureChat
 				'code' => 'X.X',
 				'img' => $this->smiliesurl . '/sm_dead.png',
 				'case' => 'i',
-<<<<<<< HEAD
 				'enabled' => true,
 			),
-=======
-				'enabled' => true
-			)
-		);
-	}
-
-	private function load_bbc_list()
-	{
-		PureChat::$globals['bbc_list'] = array(
-			0 => array(
-				'name' => PureChat::$lang['bbc']['bold'],
-				'id' => 'bold',
-				'code' => '[b] {text} [/b]'
-			),
-			1 => array(
-				'name' => PureChat::$lang['bbc']['italic'],
-				'id' => 'italic',
-				'code' => '[i] {text} [/i]'
-			),
-			2 => array(
-				'name' => PureChat::$lang['bbc']['strike'],
-				'id' => 'strike',
-				'code' => '[s] {text} [/s]'
-			),
-			3 => array(
-				'name' => PureChat::$lang['bbc']['underline'],
-				'id' => 'underline',
-				'code' => '[u] {text} [/u]'
-			),
-			4 => array(
-				'name' => PureChat::$lang['bbc']['color'],
-				'id' => 'color',
-				'code' => '[color={input}] {text} [/color]'
-			),
-			5 => array(
-				'name' => PureChat::$lang['bbc']['font'],
-				'id' => 'font',
-				'code' => '[font={input}] {text} [/font]'
-			),
-			6 => array(
-				'name' => PureChat::$lang['bbc']['size'],
-				'id' => 'size',
-				'code' => '[size={input}] {text} [size]'
-			),
-			7 => array(
-				'name' => PureChat::$lang['bbc']['html'],
-				'id' => 'html',
-				'code' => '[html] {text} [/html]'
-			),
-			8 => array(
-				'name' => PureChat::$lang['bbc']['glow'],
-				'id' => 'glow',
-				'code' => '[glow color={input}] {text} [/glow]'
-			)
->>>>>>> 47b675df0bdda51f769dba598403181097fabcfd
 		);
 	}
 

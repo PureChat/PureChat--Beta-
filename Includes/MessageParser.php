@@ -109,7 +109,7 @@ class MessageParser extends PureChat
             '|', '\\',
             '<', '>',
         );
-        foreach (self::$globals['smilies'] as $smiley)
+        foreach (PureChat::$globals['smilies'] as $smiley)
         {
             if ($smiley['enabled'] == false)
 			{
