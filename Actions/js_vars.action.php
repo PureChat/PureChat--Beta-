@@ -5,18 +5,18 @@ class Action extends PureChat
 	{
 		echo '
 var pc_script = \'', $this->script, '\';
-var pc_last_message = parseInt(', isset(self::$globals['last_message']) ? self::$globals['last_message'] : 1, ');
+var pc_last_message = parseInt(', isset(PureChat::$globals['last_message']) ? PureChat::$globals['last_message'] : 1, ');
 var pc_currentthemeurl = \'', $this->currentthemeurl, '\';
 var pc_themesurl = \'', $this->themesurl, '/default\';
 var pc_imagesurl = pc_themesurl + \'/images\'; 
-var pc_username = \'', self::$globals['user']['display_name'], '\';
-var pc_user_id = parseInt(', self::$globals['user']['id'], ');
-var pc_display_name = "', self::$globals['user']['display_name'], '";
-var pc_smilies = ', !empty(self::$globals['smilies']) ? json_encode(self::$globals['smilies']) : 'new Object()', ';
-var pc_irc_commands = ', !empty(self::$globals['irc_commands']) ? json_encode(self::$globals['irc_commands']) : 'new Object', ';
-var pc_bbc_codes = ', !empty(self::$globals['bbc_list']) ? json_encode(self::$globals['bbc_list']) : 'new Object', ';
-var pc_lang = ', json_encode(self::$lang), ';
-var status = \'', self::$globals['user']['status'], '\';';
+var pc_username = \'', PureChat::$globals['user']['display_name'], '\';
+var pc_user_id = parseInt(', PureChat::$globals['user']['id'], ');
+var pc_display_name = "', PureChat::$globals['user']['display_name'], '";
+var pc_smilies = ', !empty(PureChat::$globals['smilies']) ? json_encode(PureChat::$globals['smilies']) : 'new Object()', ';
+var pc_irc_commands = ', !empty(PureChat::$globals['irc_commands']) ? json_encode(PureChat::$globals['irc_commands']) : 'new Object', ';
+var pc_bbc_codes = ', !empty(PureChat::$globals['bbc_list']) ? json_encode(PureChat::$globals['bbc_list']) : 'new Object', ';
+var pc_lang = ', json_encode(PureChat::$lang), ';
+var status = \'', PureChat::$globals['user']['status'], '\';';
 		
 		$page = !empty($_GET['page']) ? $_GET['page'] : '';
 		$sp = !empty($_GET['sp']) ? $_GET['sp'] : '';
@@ -46,7 +46,7 @@ var status = \'', self::$globals['user']['status'], '\';';
 		}
 
 
-		if (!empty(self::$globals['script_vars']))
-			echo self::$globals['script_vars'];
+		if (!empty(PureChat::$globals['script_vars']))
+			echo PureChat::$globals['script_vars'];
 	}
 }

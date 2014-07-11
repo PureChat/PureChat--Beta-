@@ -41,26 +41,26 @@ class ChatTemplate extends PureChat
 		 */
 
 		// CSS files.
-		self::$globals['import_scripts'] .= '
+		PureChat::$globals['import_scripts'] .= '
 		<link rel="stylesheet" type="text/css" href="' . $this->currentthemeurl . '/css/profile.css" />';
 
 		// Sound Manager script.
-		self::$globals['import_scripts'] .= '
+		PureChat::$globals['import_scripts'] .= '
 		<script type="text/javascript" src="' . $this->themesurl . '/default/scripts/soundmanager/sound.js"></script>';
 
 		// Profile scripts.
-		self::$globals['import_scripts'] .= '
+		PureChat::$globals['import_scripts'] .= '
 		<script type="text/javascript" src="' . $this->themesurl . '/default/scripts/profile_handler.js"></script>
 		<script type="text/javascript" src="' . $this->currentthemeurl . '/scripts/profile.ui.js"></script>';
 
 		// Work scripts.
-		self::$globals['import_scripts'] .= '
+		PureChat::$globals['import_scripts'] .= '
 		<script type="text/javascript" src="' . $this->themesurl . '/default/scripts/chat.js"></script>
 		<script type="text/javascript" src="' . $this->themesurl . '/default/scripts/sound.js"></script>
 		<script type="text/javascript" src="' . $this->themesurl . '/default/scripts/IRC.js"></script>';
 
 		// User Interface manipulation objects.
-		self::$globals['import_scripts'] .= '
+		PureChat::$globals['import_scripts'] .= '
 		<script type="text/javascript" src="' . $this->currentthemeurl . '/scripts/chat.ui.js"></script>
 		<script type="text/javascript" src="' . $this->currentthemeurl . '/scripts/sound.ui.js"></script>';
 	}
@@ -71,9 +71,9 @@ class ChatTemplate extends PureChat
 		<div id="messages">
 			<ul>';
 
-		if (self::$globals['messages'])
+		if (PureChat::$globals['messages'])
 		{
-			foreach (self::$globals['messages'] as $m)
+			foreach (PureChat::$globals['messages'] as $m)
 			{
 				echo '
 				<li id="post_', $m['id'], '" class="chat_post">
@@ -86,7 +86,7 @@ class ChatTemplate extends PureChat
 								<em>', $m['time'], '</em>
 							</span>
 							<span id="remove_', $m['id_poster'], '_', $m['id'], '" onclick="s.remove_post(this.id)" class="remove_message_cont">
-								<img src="', $this->currentthemeurl, '/images/fugue/16/cross.png" alt="', self::$lang['remove_msg'], '" title="', self::$lang['remove_msg'], '" />
+								<img src="', $this->currentthemeurl, '/images/fugue/16/cross.png" alt="', PureChat::$lang['remove_msg'], '" title="', PureChat::$lang['remove_msg'], '" />
 							</span>
 							<br class="clear" />
 						</div>

@@ -51,14 +51,14 @@ class Action extends PureChat
 	private function add_post()
 	{
 		// We better be logged in, or there's pretty much no point in continuing.
-		if (!self::$globals['user']['logged'])
+		if (!PureChat::$globals['user']['logged'])
 		{
 			echo 'not_logged';
 			return false;
 		}
 
 		// Santize the Post...
-		$user = self::$globals['user']['id'];
+		$user = PureChat::$globals['user']['id'];
         $post = trim(htmlspecialchars($_POST['post']));
 
 		// If there was no post to speak of, just forget it.
@@ -72,7 +72,7 @@ class Action extends PureChat
             !! Scotty - You can fix this if you want...but it would require some hacking in.
             if (strlen($_POST['post']) >= 5000)
     		{
-    			$post = self::$globals['user']['display_name'] . ' has just attempted to post his life story.';
+    			$post = PureChat::$globals['user']['display_name'] . ' has just attempted to post his life story.';
     			$user = 'ChatBot';
     		}
         */
@@ -100,7 +100,7 @@ class Action extends PureChat
 	private function remove_post()
 	{
 		// Hopefully we're actually logged in.
-		if (!self::$globals['user']['logged'])
+		if (!PureChat::$globals['user']['logged'])
 		{
 			echo 'not_logged';
 			return false;
@@ -114,7 +114,7 @@ class Action extends PureChat
 			echo 'empty_data';
 			return false;
 		}
-		if (self::$globals['user']['id'] == $id_user || self::$globals['user']['is_admin'])
+		if (PureChat::$globals['user']['id'] == $id_user || PureChat::$globals['user']['is_admin'])
 			$allow['delete'] = true;
 		if (!$allow['delete'])
 		{
@@ -139,7 +139,7 @@ class Action extends PureChat
 
 	private function load_new()
 	{
-		if (!self::$globals['user']['logged'])
+		if (!PureChat::$globals['user']['logged'])
 			return false;
 
 		$last = isset($_POST['last']) ? (int) $_POST['last'] : (int) 1;
@@ -171,7 +171,7 @@ class Action extends PureChat
 				'poster' => $post['display_name'],
 				'id_poster' => $post['poster'],
 				'text' => $post['text'],
-				'time' => self::$universal->format_time($post['time']),
+				'time' => PureChat::$universal->format_time($post['time']),
 				'avatar' => $post['avatar'],
 			);
 		}

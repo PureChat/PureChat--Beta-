@@ -154,7 +154,7 @@ class parseObject extends PureChat
             {
                 // Add the appropriate pattern, and replace string.
                 $final_pattern[] = '([ ]*?source=(.+?))?';
-                $replace_final[] = ' (' . self::$lang['bbc_source'] . ': ' . $quote_matches[$source_numbers[1]] . ')';
+                $replace_final[] = ' (' . PureChat::$lang['bbc_source'] . ': ' . $quote_matches[$source_numbers[1]] . ')';
             }
 
             // Finish the quote search pattern, then do the work.
@@ -192,7 +192,7 @@ class parseObject extends PureChat
             '<',
             '>'
         );
-        foreach (self::$globals['smilies'] as $key => $smiley)
+        foreach (PureChat::$globals['smilies'] as $key => $smiley)
         {
             if ($smiley['enabled'] == false)
                 continue;

@@ -157,19 +157,19 @@ class PureChat
 	public function init()
 	{
 
-		self::$globals['template'] = array();
-		self::$globals['template']['files'] = array();
-		self::$globals['template']['methods'] = array();
-		self::$globals['script_vars'] = '';
- 		self::$globals['import_scripts'] = '';
- 		self::$globals['groups'] = array();
+		PureChat::$globals['template'] = array();
+		PureChat::$globals['template']['files'] = array();
+		PureChat::$globals['template']['methods'] = array();
+		PureChat::$globals['script_vars'] = '';
+ 		PureChat::$globals['import_scripts'] = '';
+ 		PureChat::$globals['groups'] = array();
 
 		// Load the reusable methods.
 		require_once($this->includesdir . '/universal_functions.php');
-		self::$universal = new Universal;
+		PureChat::$universal = new Universal;
 
 		// Load the main language file.
-		call_user_func(array(self::$universal, 'load_language'), 'main');
+		call_user_func(array(PureChat::$universal, 'load_language'), 'main');
 
 		// Call some "self" methods.
 		$self_methods = array('load_user', 'load_sources', 'do_action', 'load_UI');
@@ -194,7 +194,7 @@ class PureChat
 	private function do_action()
 	{
 		if (isset($_REQUEST['ajax_connection']))
-			self::$globals['ajax'] = true;
+			PureChat::$globals['ajax'] = true;
 
 		$file = $this->actionsdir . '/' . $this->actions['main'];
 		require_once($file);
@@ -243,7 +243,7 @@ class PureChat
 		$source_main = new SourceMain;
 		$source_main->init();
 
-		if (!self::$globals['user']['logged'])
+		if (!PureChat::$globals['user']['logged'])
 		{
 			require_once($this->sourcesdir . '/login_register.source.php');
 			$guest_source = new GuestSource;
@@ -285,7 +285,7 @@ class PureChat
 	 */
 	private function load_UI()
 	{
-		if (self::$globals['ajax'])
+		if (PureChat::$globals['ajax'])
 			return false;
 
 		$directory = $this->currentthemedir;
@@ -297,7 +297,7 @@ class PureChat
 		$wrapper = new MainTemplate;
 
 		$wrapper->template_top();
-		foreach (self::$globals['template']['methods'] as $method)
+		foreach (PureChat::$globals['template']['methods'] as $method)
 			call_user_func(array($method['object'], $method['method']));
 		$wrapper->template_bottom();
 	}
