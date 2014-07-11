@@ -149,15 +149,12 @@ class MainTemplate extends PureChat
 			<form action="', $this->script, '" method="post" onsubmit="s.call_waiting(s.post_new); return false;">
 				<div> <!-- XHTML Strict requires forum inputs to be encapsulated. -->
 					<div id="message_input_container">
-						<input type="text" id="message_input" />
+						<input type="text" id="message_input" autocomplete="off" />
 					</div>
 
 					<div id="icon_container">
 						<a id="smilies_link" title="', PureChat::$lang['smilies_title'], '" class="centertext">
 							<img src="', $this->currentthemeurl, '/images/smilies/sm_smile.png" alt="', PureChat::$lang['smilies_title'], '" />
-						</a>
-						<a id="bbc_link" title="', PureChat::$lang['bbc_title'], '" class="centertext">
-							<img src="', $this->currentthemeurl, '/images/T.png" alt="', PureChat::$lang['bbc_title'], '" />
 						</a>
 					</div>
 
@@ -168,11 +165,9 @@ class MainTemplate extends PureChat
 		echo '
 		</div>';
 
+		//-- TODO: Shouldn\'t these be dynamically created with JavaScript...
 		echo '
 		<div id="list_smilies">
-			<!-- Content inserted with JavaScipt, so we can loop the smilies and bind a click event to each one. -->
-		</div>
-		<div id="list_bbc">
 			<!-- Content inserted with JavaScipt, so we can loop the smilies and bind a click event to each one. -->
 		</div>
 		<div id="list_irc">

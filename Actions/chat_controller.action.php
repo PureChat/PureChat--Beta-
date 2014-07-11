@@ -57,7 +57,7 @@ class Action extends PureChat
 			return false;
 		}
 
-		// Santize the Post...
+		// Sanitize the Post...
 		$user = PureChat::$globals['user']['id'];
         $post = trim(htmlspecialchars($_POST['post']));
 
@@ -67,15 +67,6 @@ class Action extends PureChat
 			echo 'empty_post';
 			return false;
 		}
-
-		/*
-            !! Scotty - You can fix this if you want...but it would require some hacking in.
-            if (strlen($_POST['post']) >= 5000)
-    		{
-    			$post = PureChat::$globals['user']['display_name'] . ' has just attempted to post his life story.';
-    			$user = 'ChatBot';
-    		}
-        */
 
 		$sql = '
 			INSERT INTO pc_messages (poster, text, time)
@@ -163,9 +154,19 @@ class Action extends PureChat
 			return false;
 
 		$posts = array();
+		require_once($this->includesdir . '/MessageParser.php');
+		$this->parse = new MessageParser();
 		foreach ($q as $post)
 		{
-            $post['text'] = $parse->smileys($parse->bbc($post['text'], $post['display_name']), $post['display_name']);
+
+			//-- TODO: We may eventually want to make $this->parse->format() with an argument of what to format to reduce lines to call.
+			$this->parse->setMessage($post['text'], $post['display_name']);
+			$this->parse->formatVulgar();
+			$this->parse->formatText();
+			$this->parse->formatSmileys();
+			$this->parse->formatURLs();
+			$post['text'] = $this->parse->getMessage();
+
 			$posts[] = array(
 				'id' => $post['id'],
 				'poster' => $post['display_name'],

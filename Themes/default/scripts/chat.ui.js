@@ -127,27 +127,6 @@ var ChatInterface = function()
 		}
 	}
 
-	this.insert_bbc = function(param)
-	{
-		if (document.selection)
-		{
-			$('#message_input').focus();
-			sel = document.selection.createRange();
-			sel.text = ' ' + param.data.insert + ' ';
-		}
-
-		else if (document.getElementById('message_input').selectionStart || document.getElementById('message_input').selectionStart == '0')
-		{
-			var startPos = document.getElementById('message_input').selectionStart;
-			var endPos = document.getElementById('message_input').selectionEnd;
-			document.getElementById('message_input').value = document.getElementById('message_input').value.substring(0, startPos) + ' ' + param.data.insert + ' ' + document.getElementById('message_input').value.substring(endPos, document.getElementById('message_input').value.length);
-		}
-		else
-		{
-			document.getElementById('message_input').value += ' ' + param.data.insert + ' ';
-		}
-	}
-
 	this.status_bar = function(status)
 	{
 		if (status == null || status == '')
@@ -236,17 +215,6 @@ var ChatInterface = function()
 		});
 	}
 
-	this.load_bbc = function()
-	{
-		$.each(pc_bbc_codes, function(i, data)
-		{
-			$('#list_bbc').append('<span id="bbcl_' + data.id + '" title="' + data.name +'"></span>');
-			$('#bbcl_' + data.id).append(data.name);
-
-			$('#bbcl_' + data.id).on('click', {insert: data.code}, chat_ui.insert_bbc);
-		});
-	}
-
 	this.hightlight_me = function()
 	{
 		var messages = $('.message');
@@ -294,13 +262,12 @@ $(document).ready(function()
 	chat_ui.status_bar(status);
 
 	chat_ui.load_smilies();
-	chat_ui.load_bbc();
 	chat_ui.load_irc();
 
 	chat_ui.bind_events();
 
 	chat_ui.hightlight_me();
 	
-	$('#message_input').attr('autocomplete', 'off').focus();
+	$('#message_input').focus();
 	chat_ui.focused = true;
 });

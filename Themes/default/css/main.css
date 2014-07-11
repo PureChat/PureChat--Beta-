@@ -660,7 +660,7 @@ hr.sidebar_hr
 {
 	position: absolute;
 	top: 12px;
-	right: 225px;
+	right: 178px;
 	bottom: 10px;
 	left: 38px;
 	background: url(../images/post_input_angle.png) 33px 0 no-repeat;
@@ -727,27 +727,18 @@ hr.sidebar_hr
 	top: 22px;
 	right: 120px;
 	height: 42px;
-	width: 110px;
+	width: 52px;
 	background: url(../images/input_button_bg.png) repeat;
 }
 #smilies_link
 {
 	display: block;
 	float: left;
-	width: 49%;
+	width: 100%;
 	height: 42px;
 	cursor: pointer;
 	border-right: 1px solid #13181c;
 	/*background: url(../images/smilies/sm_smile.png) center center no-repeat;*/
-}
-#bbc_link
-{
-	display: block;
-	float: left;
-	width: 50%;
-	height: 42px;
-	cursor: pointer;
-	/*background: url(../images/T.png) center center no-repeat;*/
 }
 #irc_link
 {
@@ -771,18 +762,6 @@ hr.sidebar_hr
 	padding: 10px 20px 10px 10px;
 	background: url(../images/pop_menu.png) no-repeat;
 }
-#list_bbc
-{
-	display: none;
-	position: absolute;
-	right: 270px;
-	bottom: 80px;
-	z-index: 2;
-	width: 315px;
-	height: 200px;
-	padding: 10px 20px 10px 10px;
-	background: url(../images/pop_menu.png) no-repeat;
-}
 #list_irc
 {
 	display: none;
@@ -795,7 +774,7 @@ hr.sidebar_hr
 	padding: 10px 20px 10px 10px;
 	background: url(../images/pop_menu.png) no-repeat;
 }
-#list_irc span, #list_bbc span
+#list_irc span
 {
 	display: block;
 	margin: 3px 0;
@@ -949,28 +928,13 @@ hr.sidebar_hr
 	font-size: small;
 }
 
+/* TODO: Consider using <strong></strong> and <em></em> for proper semantic meaning */
 .bbcBold
 {
     font-weight: bold;
 }
 .bbcItalic
 {
-    font-style: italic;
-}
-.bbcStrike
-{
-    text-decoration: line-through;
-}
-.bbcUnderline
-{
-    text-decoration: underline;
-}
-.bbcQuote
-{
-    border-left: 2px solid #404040;
-    padding-left: 4px;
-    font-family: Calibri;
-    display: inline-block;
     font-style: italic;
 }
 

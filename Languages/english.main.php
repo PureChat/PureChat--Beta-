@@ -89,9 +89,7 @@ $lang = array(
 	'profile' => 'Profile',
 	'groups_fatal' => 'Uh oh, you appear to be an idiot.',
 
-    // BBC
     'smilies_title' => 'Smilies',
-    'bbc_title' => 'BBC',
     'bbc_source' => 'Source',
 	'bbc' => array(
 		'bold' => 'Bold',

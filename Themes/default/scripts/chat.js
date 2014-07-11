@@ -30,6 +30,7 @@ var PureChatSource = function()
 
 	this.post_new = function()
 	{
+		alert("test");
 		var message = $('#message_input').val();
 		chat_ui.clear_field();
 
