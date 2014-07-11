@@ -173,7 +173,7 @@ class PureChat
 
 		// Call some "self" methods.
 		$self_methods = array('load_user', 'load_sources', 'do_action', 'load_UI');
-		foreach ($self_methods as $key => $value)
+		foreach ($self_methods as $value)
 			call_user_func(array('self', $value));
 
 	}
