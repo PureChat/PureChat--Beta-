@@ -35,33 +35,26 @@ class MainTemplate extends PureChat
 
 	protected function template_top()
 	{
-		echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
+		echo '<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title> PureChat </title>
-
-		<!-- Favicon icons. Yayz -->
+		<meta charset="utf-8" />
 		<link rel="shortcut icon" href="', $this->currentthemeurl, '/images/icon.ico" />
-
-		<!-- Better let the page have style, or all hope is lost. -->
+		<!-- PureChat Styling -->
 		<link rel="stylesheet" type="text/css" href="', $this->currentthemeurl, '/css/main.css" />
-
-		<!-- Load jQuery and main.js. Our main.js file is global, and effects all pages. -->
-		<script type="text/javascript" src="', $this->themesurl, '/default/scripts/jQuery.js"></script>
-		', PureChat::$globals['user']['logged'] ? '<script type="text/javascript" src="' . $this->currentthemeurl . '/scripts/main.js"></script>' : '', '
-
-		<!-- Import the files specific to the page we\'re looking at. -->
-		', !empty(PureChat::$globals['import_scripts']) ? PureChat::$globals['import_scripts'] : '', '
-		
-		<!-- Define some javascript variables for use. -->
+		<!-- PureChat Scripts -->
+		<script type="text/javascript" src="', $this->themesurl, '/default/scripts/jQuery.js"></script>';
+		if (PureChat::$globals['user']['logged']) {
+			echo '
+		<script type="text/javascript" src="' . $this->currentthemeurl . '/scripts/main.js"></script>';
+		}
+		if (!empty(PureChat::$globals['import_scripts'])) {
+			echo PureChat::$globals['import_scripts'];
+		}
+		echo '
 		<script type="text/javascript" src="', $this->script, '?action=js_vars&ajax_connection=true"></script>
-
-
-		<!-- Throw out some random meta tags. -->
-		<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 	</head>
-
 	<body>';
 	}
 
@@ -72,6 +65,7 @@ class MainTemplate extends PureChat
 
 		// Avatar, or in the case of a guest, a login form.
 		if (PureChat::$globals['user']['logged'])
+		{
 			echo '
 			<div id="sidebar_header">
 				<div id="sidebar_avatar_container">
@@ -80,7 +74,9 @@ class MainTemplate extends PureChat
 					</div>
 				</div>
 			</div>';
+		}
 		else
+		{
 			echo '
 			<div id="sidebar_header_padded">
 				<form action="', $this->script, '?action=user&perform=login" method="post">
@@ -93,6 +89,7 @@ class MainTemplate extends PureChat
 					<input type="submit" value="', PureChat::$lang['login'], '" class="dark_button" />
 				</form>
 			</div>';
+		}
 
 		// User info and junk.
 		echo '
@@ -145,6 +142,7 @@ class MainTemplate extends PureChat
 		<div id="footer">';
 
 		if (PureChat::$globals['user']['logged'])
+		{
 			echo '
 			<form action="', $this->script, '" method="post" onsubmit="s.call_waiting(s.post_new); return false;">
 				<div> <!-- XHTML Strict requires forum inputs to be encapsulated. -->
@@ -161,6 +159,7 @@ class MainTemplate extends PureChat
 					<input type="submit" id="message_submit" value="', PureChat::$lang['post'], '" />
 				</div>
 			</form>';
+		}
 			
 		echo '
 		</div>';
