@@ -134,8 +134,6 @@ class Action extends PureChat
 			return false;
 
 		$last = isset($_POST['last']) ? (int) $_POST['last'] : (int) 1;
-        require_once($this->includesdir . '/parse.php');
-        $parse = new parseObject;
 		$sql = '
 			SELECT msg.id, msg.poster,
 				msg.text, msg.time,
