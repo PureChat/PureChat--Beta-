@@ -35,7 +35,7 @@ class CaptchaObject extends PureChat
 	public function __construct()
 	{
 		parent::__construct();
-		call_user_func(array(self::$universal, 'load_language'), 'captcha');
+		call_user_func(array(PureChat::$universal, 'load_language'), 'captcha');
 	}
 	public function initalize_captcha($form_action, $form_id, $submit_id, $boxes = 4, $use_labels = false)
 	{
@@ -48,546 +48,546 @@ class CaptchaObject extends PureChat
 		$this->images = array(
 			array(
 				'url' => 'address-book',
-				'title' => self::$lang['captcha_address-book']
+				'title' => PureChat::$lang['captcha_address-book']
 			),
 			array(
 				'url' => 'address-book-blue',
-				'title' => self::$lang['captcha_address-book-blue']
+				'title' => PureChat::$lang['captcha_address-book-blue']
 			),
 			array(
 				'url' => 'alarm-clock',
-				'title' => self::$lang['captcha_alarm-clock']
+				'title' => PureChat::$lang['captcha_alarm-clock']
 			),
 			array(
 				'url' => 'alarm-clock-blue',
-				'title' => self::$lang['captcha_alarm-clock-blue']
+				'title' => PureChat::$lang['captcha_alarm-clock-blue']
 			),
 			array(
 				'url' => 'application',
-				'title' => self::$lang['captcha_application']
+				'title' => PureChat::$lang['captcha_application']
 			),
 			array(
 				'url' => 'application-blue',
-				'title' => self::$lang['captcha_application-blue']
+				'title' => PureChat::$lang['captcha_application-blue']
 			),
 			array(
 				'url' => 'arrow',
-				'title' => self::$lang['captcha_arrow']
+				'title' => PureChat::$lang['captcha_arrow']
 			),
 			array(
 				'url' => 'arrow-090',
-				'title' => self::$lang['captcha_arrow-090']
+				'title' => PureChat::$lang['captcha_arrow-090']
 			),
 			array(
 				'url' => 'arrow-180',
-				'title' => self::$lang['captcha_arrow-180']
+				'title' => PureChat::$lang['captcha_arrow-180']
 			),
 			array(
 				'url' => 'arrow-270',
-				'title' => self::$lang['captcha_arrow-270']
+				'title' => PureChat::$lang['captcha_arrow-270']
 			),
 			array(
 				'url' => 'balloon',
-				'title' => self::$lang['captcha_balloon']
+				'title' => PureChat::$lang['captcha_balloon']
 			),
 			array(
 				'url' => 'balloon-facebook',
-				'title' => self::$lang['captcha_balloon-facebook']
+				'title' => PureChat::$lang['captcha_balloon-facebook']
 			),
 			array(
 				'url' => 'balloon-twitter',
-				'title' => self::$lang['captcha_balloon-twitter']
+				'title' => PureChat::$lang['captcha_balloon-twitter']
 			),
 			array(
 				'url' => 'battery-charge',
-				'title' => self::$lang['captcha_battery-charge']
+				'title' => PureChat::$lang['captcha_battery-charge']
 			),
 			array(
 				'url' => 'battery-empty',
-				'title' => self::$lang['captcha_battery-empty']
+				'title' => PureChat::$lang['captcha_battery-empty']
 			),
 			array(
 				'url' => 'battery-full',
-				'title' => self::$lang['captcha_battery-full']
+				'title' => PureChat::$lang['captcha_battery-full']
 			),
 			array(
 				'url' => 'battery-low',
-				'title' => self::$lang['captcha_battery-low']
+				'title' => PureChat::$lang['captcha_battery-low']
 			),
 			array(
 				'url' => 'battery-plug',
-				'title' => self::$lang['captcha_battery-plug']
+				'title' => PureChat::$lang['captcha_battery-plug']
 			),
 			array(
 				'url' => 'bell',
-				'title' => self::$lang['captcha_bell']
+				'title' => PureChat::$lang['captcha_bell']
 			),
 			array(
 				'url' => 'bin',
-				'title' => self::$lang['captcha_bin']
+				'title' => PureChat::$lang['captcha_bin']
 			),
 			array(
 				'url' => 'bin-metal',
-				'title' => self::$lang['captcha_bin-metal']
+				'title' => PureChat::$lang['captcha_bin-metal']
 			),
 			array(
 				'url' => 'blue-document-text',
-				'title' => self::$lang['captcha_blue-document-text']
+				'title' => PureChat::$lang['captcha_blue-document-text']
 			),
 			array(
 				'url' => 'blue-folder',
-				'title' => self::$lang['captcha_blue-folder']
+				'title' => PureChat::$lang['captcha_blue-folder']
 			),
 			array(
 				'url' => 'book',
-				'title' => self::$lang['captcha_book']
+				'title' => PureChat::$lang['captcha_book']
 			),
 			array(
 				'url' => 'book-brown',
-				'title' => self::$lang['captcha_book-brown']
+				'title' => PureChat::$lang['captcha_book-brown']
 			),
 			array(
 				'url' => 'bookmark',
-				'title' => self::$lang['captcha_bookmark']
+				'title' => PureChat::$lang['captcha_bookmark']
 			),
 			array(
 				'url' => 'box',
-				'title' => self::$lang['captcha_box']
+				'title' => PureChat::$lang['captcha_box']
 			),
 			array(
 				'url' => 'box-label',
-				'title' => self::$lang['captcha_box-label']
+				'title' => PureChat::$lang['captcha_box-label']
 			),
 			array(
 				'url' => 'briefcase',
-				'title' => self::$lang['captcha_briefcase']
+				'title' => PureChat::$lang['captcha_briefcase']
 			),
 			array(
 				'url' => 'calculator',
-				'title' => self::$lang['captcha_calculator']
+				'title' => PureChat::$lang['captcha_calculator']
 			),
 			array(
 				'url' => 'calendar-day',
-				'title' => self::$lang['captcha_calendar-day']
+				'title' => PureChat::$lang['captcha_calendar-day']
 			),
 			array(
 				'url' => 'calendar-month',
-				'title' => self::$lang['captcha_calendar-month']
+				'title' => PureChat::$lang['captcha_calendar-month']
 			),
 			array(
 				'url' => 'camera',
-				'title' => self::$lang['captcha_camera']
+				'title' => PureChat::$lang['captcha_camera']
 			),
 			array(
 				'url' => 'camera-lens',
-				'title' => self::$lang['captcha_camera-lens']
+				'title' => PureChat::$lang['captcha_camera-lens']
 			),
 			array(
 				'url' => 'card-address',
-				'title' => self::$lang['captcha_card-address']
+				'title' => PureChat::$lang['captcha_card-address']
 			),
 			array(
 				'url' => 'clock',
-				'title' => self::$lang['captcha_clock']
+				'title' => PureChat::$lang['captcha_clock']
 			),
 			array(
 				'url' => 'color',
-				'title' => self::$lang['captcha_color']
+				'title' => PureChat::$lang['captcha_color']
 			),
 			array(
 				'url' => 'color-swatch',
-				'title' => self::$lang['captcha_color-swatch']
+				'title' => PureChat::$lang['captcha_color-swatch']
 			),
 			array(
 				'url' => 'credit-card',
-				'title' => self::$lang['captcha_credit-card']
+				'title' => PureChat::$lang['captcha_credit-card']
 			),
 			array(
 				'url' => 'credit-card-green',
-				'title' => self::$lang['captcha_credit-card-green']
+				'title' => PureChat::$lang['captcha_credit-card-green']
 			),
 			array(
 				'url' => 'cross',
-				'title' => self::$lang['captcha_cross']
+				'title' => PureChat::$lang['captcha_cross']
 			),
 			array(
 				'url' => 'database',
-				'title' => self::$lang['captcha_database']
+				'title' => PureChat::$lang['captcha_database']
 			),
 			array(
 				'url' => 'disc',
-				'title' => self::$lang['captcha_disc']
+				'title' => PureChat::$lang['captcha_disc']
 			),
 			array(
 				'url' => 'disc-blue',
-				'title' => self::$lang['captcha_disc-blue']
+				'title' => PureChat::$lang['captcha_disc-blue']
 			),
 			array(
 				'url' => 'disk',
-				'title' => self::$lang['captcha_disk']
+				'title' => PureChat::$lang['captcha_disk']
 			),
 			array(
 				'url' => 'disk-black',
-				'title' => self::$lang['captcha_disk-black']
+				'title' => PureChat::$lang['captcha_disk-black']
 			),
 			array(
 				'url' => 'document-text',
-				'title' => self::$lang['captcha_document-text']
+				'title' => PureChat::$lang['captcha_document-text']
 			),
 			array(
 				'url' => 'drive',
-				'title' => self::$lang['captcha_drive']
+				'title' => PureChat::$lang['captcha_drive']
 			),
 			array(
 				'url' => 'edit',
-				'title' => self::$lang['captcha_edit']
+				'title' => PureChat::$lang['captcha_edit']
 			),
 			array(
 				'url' => 'equalizer',
-				'title' => self::$lang['captcha_equalizer']
+				'title' => PureChat::$lang['captcha_equalizer']
 			),
 			array(
 				'url' => 'eraser',
-				'title' => self::$lang['captcha_eraser']
+				'title' => PureChat::$lang['captcha_eraser']
 			),
 			array(
 				'url' => 'exclamation',
-				'title' => self::$lang['captcha_exclamation']
+				'title' => PureChat::$lang['captcha_exclamation']
 			),
 			array(
 				'url' => 'feed',
-				'title' => self::$lang['captcha_feed']
+				'title' => PureChat::$lang['captcha_feed']
 			),
 			array(
 				'url' => 'film',
-				'title' => self::$lang['captcha_film']
+				'title' => PureChat::$lang['captcha_film']
 			),
 			array(
 				'url' => 'fire',
-				'title' => self::$lang['captcha_fire']
+				'title' => PureChat::$lang['captcha_fire']
 			),
 			array(
 				'url' => 'folder',
-				'title' => self::$lang['captcha_folder']
+				'title' => PureChat::$lang['captcha_folder']
 			),
 			array(
 				'url' => 'globe-green',
-				'title' => self::$lang['captcha_globe-green']
+				'title' => PureChat::$lang['captcha_globe-green']
 			),
 			array(
 				'url' => 'home',
-				'title' => self::$lang['captcha_home']
+				'title' => PureChat::$lang['captcha_home']
 			),
 			array(
 				'url' => 'image','title'  => 'Image'
 			),
 			array(
 				'url' => 'image-sunset',
-				'title' => self::$lang['captcha_image-sunset']
+				'title' => PureChat::$lang['captcha_image-sunset']
 			),
 			array(
 				'url' => 'inbox',
-				'title' => self::$lang['captcha_inbox']
+				'title' => PureChat::$lang['captcha_inbox']
 			),
 			array(
 				'url' => 'information',
-				'title' => self::$lang['captcha_information']
+				'title' => PureChat::$lang['captcha_information']
 			),
 			array(
 				'url' => 'jar',
-				'title' => self::$lang['captcha_jar']
+				'title' => PureChat::$lang['captcha_jar']
 			),
 			array(
 				'url' => 'jar-label',
-				'title' => self::$lang['captcha_jar-label']
+				'title' => PureChat::$lang['captcha_jar-label']
 			),
 			array(
 				'url' => 'keyboard',
-				'title' => self::$lang['captcha_keyboard']
+				'title' => PureChat::$lang['captcha_keyboard']
 			),
 			array(
 				'url' => 'layer',
-				'title' => self::$lang['captcha_layer']
+				'title' => PureChat::$lang['captcha_layer']
 			),
 			array(
 				'url' => 'lifebuoy',
-				'title' => self::$lang['captcha_lifebuoy']
+				'title' => PureChat::$lang['captcha_lifebuoy']
 			),
 			array(
 				'url' => 'light-bulb',
-				'title' => self::$lang['captcha_light-bulb']
+				'title' => PureChat::$lang['captcha_light-bulb']
 			),
 			array(
 				'url' => 'light-bulb-off',
-				'title' => self::$lang['captcha_light-bulb-off']
+				'title' => PureChat::$lang['captcha_light-bulb-off']
 			),
 			array(
 				'url' => 'magnet',
-				'title' => self::$lang['captcha_magnet']
+				'title' => PureChat::$lang['captcha_magnet']
 			),
 			array(
 				'url' => 'magnifier',
-				'title' => self::$lang['captcha_magnifier']
+				'title' => PureChat::$lang['captcha_magnifier']
 			),
 			array(
 				'url' => 'mail',
-				'title' => self::$lang['captcha_mail']
+				'title' => PureChat::$lang['captcha_mail']
 			),
 			array(
 				'url' => 'mail-open',
-				'title' => self::$lang['captcha_mail-open']
+				'title' => PureChat::$lang['captcha_mail-open']
 			),
 			array(
 				'url' => 'map',
-				'title' => self::$lang['captcha_map']
+				'title' => PureChat::$lang['captcha_map']
 			),
 			array(
 				'url' => 'marker',
-				'title' => self::$lang['captcha_marker']
+				'title' => PureChat::$lang['captcha_marker']
 			),
 			array(
 				'url' => 'media-player',
-				'title' => self::$lang['captcha_media-player']
+				'title' => PureChat::$lang['captcha_media-player']
 			),
 			array(
 				'url' => 'media-player-black',
-				'title' => self::$lang['captcha_media-player-black']
+				'title' => PureChat::$lang['captcha_media-player-black']
 			),
 			array(
 				'url' => 'megaphone',
-				'title' => self::$lang['captcha_megaphone']
+				'title' => PureChat::$lang['captcha_megaphone']
 			),
 			array(
 				'url' => 'microphone',
-				'title' => self::$lang['captcha_microphone']
+				'title' => PureChat::$lang['captcha_microphone']
 			),
 			array(
 				'url' => 'minus',
-				'title' => self::$lang['captcha_minus']
+				'title' => PureChat::$lang['captcha_minus']
 			),
 			array(
 				'url' => 'mobile-phone',
-				'title' => self::$lang['captcha_mobile-phone']
+				'title' => PureChat::$lang['captcha_mobile-phone']
 			),
 			array(
 				'url' => 'monitor',
-				'title' => self::$lang['captcha_monitor']
+				'title' => PureChat::$lang['captcha_monitor']
 			),
 			array(
 				'url' => 'newspaper',
-				'title' => self::$lang['captcha_newspaper']
+				'title' => PureChat::$lang['captcha_newspaper']
 			),
 			array(
 				'url' => 'notebook',
-				'title' => self::$lang['captcha_notebook']
+				'title' => PureChat::$lang['captcha_notebook']
 			),
 			array(
 				'url' => 'paper-bag',
-				'title' => self::$lang['captcha_paper-bag']
+				'title' => PureChat::$lang['captcha_paper-bag']
 			),
 			array(
 				'url' => 'paper-bag-label',
-				'title' => self::$lang['captcha_paper-bag-label']
+				'title' => PureChat::$lang['captcha_paper-bag-label']
 			),
 			array(
 				'url' => 'pencil',
-				'title' => self::$lang['captcha_pencil']
+				'title' => PureChat::$lang['captcha_pencil']
 			),
 			array(
 				'url' => 'photo-album',
-				'title' => self::$lang['captcha_photo-album']
+				'title' => PureChat::$lang['captcha_photo-album']
 			),
 			array(
 				'url' => 'photo-album-blue',
-				'title' => self::$lang['captcha_photo-album-blue']
+				'title' => PureChat::$lang['captcha_photo-album-blue']
 			),
 			array(
 				'url' => 'plus',
-				'title' => self::$lang['captcha_plus']
+				'title' => PureChat::$lang['captcha_plus']
 			),
 			array(
 				'url' => 'point',
-				'title' => self::$lang['captcha_point']
+				'title' => PureChat::$lang['captcha_point']
 			),
 			array(
 				'url' => 'printer',
-				'title' => self::$lang['captcha_printer']
+				'title' => PureChat::$lang['captcha_printer']
 			),
 			array(
 				'url' => 'receipt-text',
-				'title' => self::$lang['captcha_receipt-text']
+				'title' => PureChat::$lang['captcha_receipt-text']
 			),
 			array(
 				'url' => 'ruler',
-				'title' => self::$lang['captcha_ruler']
+				'title' => PureChat::$lang['captcha_ruler']
 			),
 			array(
 				'url' => 'scissors',
-				'title' => self::$lang['captcha_scissors']
+				'title' => PureChat::$lang['captcha_scissors']
 			),
 			array(
 				'url' => 'scissors-blue',
-				'title' => self::$lang['captcha_scissors-blue']
+				'title' => PureChat::$lang['captcha_scissors-blue']
 			),
 			array(
 				'url' => 'server',
-				'title' => self::$lang['captcha_server']
+				'title' => PureChat::$lang['captcha_server']
 			),
 			array(
 				'url' => 'service-bell',
-				'title' => self::$lang['captcha_service-bell']
+				'title' => PureChat::$lang['captcha_service-bell']
 			),
 			array(
 				'url' => 'smiley',
-				'title' => self::$lang['captcha_smiley']
+				'title' => PureChat::$lang['captcha_smiley']
 			),
 			array(
 				'url' => 'smiley-lol',
-				'title' => self::$lang['captcha_smiley-lol']
+				'title' => PureChat::$lang['captcha_smiley-lol']
 			),
 			array(
 				'url' => 'soap',
-				'title' => self::$lang['captcha_soap']
+				'title' => PureChat::$lang['captcha_soap']
 			),
 			array(
 				'url' => 'socket',
-				'title' => self::$lang['captcha_socket']
+				'title' => PureChat::$lang['captcha_socket']
 			),
 			array(
 				'url' => 'sofa',
-				'title' => self::$lang['captcha_sofa']
+				'title' => PureChat::$lang['captcha_sofa']
 			),
 			array(
 				'url' => 'sort',
-				'title' => self::$lang['captcha_sort']
+				'title' => PureChat::$lang['captcha_sort']
 			),
 			array(
 				'url' => 'stamp',
-				'title' => self::$lang['captcha_stamp']
+				'title' => PureChat::$lang['captcha_stamp']
 			),
 			array(
 				'url' => 'star',
-				'title' => self::$lang['captcha_star']
+				'title' => PureChat::$lang['captcha_star']
 			),
 			array(
 				'url' => 'star-empty',
-				'title' => self::$lang['captcha_star-empty']
+				'title' => PureChat::$lang['captcha_star-empty']
 			),
 			array(
 				'url' => 'sticky-note',
-				'title' => self::$lang['captcha_sticky-note']
+				'title' => PureChat::$lang['captcha_sticky-note']
 			),
 			array(
 				'url' => 'store',
-				'title' => self::$lang['captcha_store']
+				'title' => PureChat::$lang['captcha_store']
 			),
 			array(
 				'url' => 'store-label',
-				'title' => self::$lang['captcha_store-label']
+				'title' => PureChat::$lang['captcha_store-label']
 			),
 			array(
 				'url' => 'switch',
-				'title' => self::$lang['captcha_switch']
+				'title' => PureChat::$lang['captcha_switch']
 			),
 			array(
 				'url' => 'system-monitor',
-				'title' => self::$lang['captcha_system-monitor']
+				'title' => PureChat::$lang['captcha_system-monitor']
 			),
 			array(
 				'url' => 'table',
-				'title' => self::$lang['captcha_table']
+				'title' => PureChat::$lang['captcha_table']
 			),
 			array(
 				'url' => 'tag',
-				'title' => self::$lang['captcha_tag']
+				'title' => PureChat::$lang['captcha_tag']
 			),
 			array(
 				'url' => 'tag-label',
-				'title' => self::$lang['captcha_tag-label']
+				'title' => PureChat::$lang['captcha_tag-label']
 			),
 			array(
 				'url' => 'target',
-				'title' => self::$lang['captcha_target']
+				'title' => PureChat::$lang['captcha_target']
 			),
 			array(
 				'url' => 'television',
-				'title' => self::$lang['captcha_television']
+				'title' => PureChat::$lang['captcha_television']
 			),
 			array(
 				'url' => 'terminal',
-				'title' => self::$lang['captcha_terminal']
+				'title' => PureChat::$lang['captcha_terminal']
 			),
 			array(
 				'url' => 'thumb',
-				'title' => self::$lang['captcha_thumb']
+				'title' => PureChat::$lang['captcha_thumb']
 			),
 			array(
 				'url' => 'thumb-up',
-				'title' => self::$lang['captcha_thumb-up']
+				'title' => PureChat::$lang['captcha_thumb-up']
 			),
 			array(
 				'url' => 'tick',
-				'title' => self::$lang['captcha_tick']
+				'title' => PureChat::$lang['captcha_tick']
 			),
 			array(
 				'url' => 'ticket',
-				'title' => self::$lang['captcha_ticket']
+				'title' => PureChat::$lang['captcha_ticket']
 			),
 			array(
 				'url' => 'universal',
-				'title' => self::$lang['captcha_universal']
+				'title' => PureChat::$lang['captcha_universal']
 			),
 			array(
 				'url' => 'user',
-				'title' => self::$lang['captcha_user']
+				'title' => PureChat::$lang['captcha_user']
 			),
 			array(
 				'url' => 'user-business',
-				'title' => self::$lang['captcha_user-business']
+				'title' => PureChat::$lang['captcha_user-business']
 			),
 			array(
 				'url' => 'user-business-boss',
-				'title' => self::$lang['captcha_user-business-boss']
+				'title' => PureChat::$lang['captcha_user-business-boss']
 			),
 			array(
 				'url' => 'user-female',
-				'title' => self::$lang['captcha_user-female']
+				'title' => PureChat::$lang['captcha_user-female']
 			),
 			array(
 				'url' => 'vise',
-				'title' => self::$lang['captcha_vise']
+				'title' => PureChat::$lang['captcha_vise']
 			),
 			array(
 				'url' => 'wall',
-				'title' => self::$lang['captcha_wall']
+				'title' => PureChat::$lang['captcha_wall']
 			),
 			array(
 				'url' => 'wand',
-				'title' => self::$lang['captcha_wand']
+				'title' => PureChat::$lang['captcha_wand']
 			),
 			array(
 				'url' => 'wand-hat',
-				'title' => self::$lang['captcha_wand-hat']
+				'title' => PureChat::$lang['captcha_wand-hat']
 			),
 			array(
 				'url' => 'water',
-				'title' => self::$lang['captcha_water']
+				'title' => PureChat::$lang['captcha_water']
 			),
 			array(
 				'url' => 'webcam',
-				'title' => self::$lang['captcha_webcam']
+				'title' => PureChat::$lang['captcha_webcam']
 			),
 			array(
 				'url' => 'wooden-box',
-				'title' => self::$lang['captcha_wooden-box']
+				'title' => PureChat::$lang['captcha_wooden-box']
 			),
 			array(
 				'url' => 'wooden-box-label',
-				'title' => self::$lang['captcha_wooden-box-label']
+				'title' => PureChat::$lang['captcha_wooden-box-label']
 			),
 			array(
 				'url' => 'yin-yang',
-				'title' => self::$lang['captcha_yin-yang']
+				'title' => PureChat::$lang['captcha_yin-yang']
 			)
 		);
 
@@ -632,16 +632,16 @@ class CaptchaObject extends PureChat
 			$this->second_row = array_reverse($this->second_row, true);
 
 		// CSS
-		self::$globals['import_scripts'] .= '
+		PureChat::$globals['import_scripts'] .= '
 		<link rel="stylesheet" type="text/css" href="' . $this->currentthemeurl . '/css/captcha.css" />
 		<link rel="stlyesheet" type="text/css" href="' . $this->currentthemeurl . '/css/jquery-ui.min.css" />';
 
 		// Script files.
-		self::$globals['import_scripts'] .= '
+		PureChat::$globals['import_scripts'] .= '
 		<script type="text/javascript" src="' . $this->themesurl . '/default/scripts/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="' . $this->currentthemeurl . '/scripts/captcha.ui.js"></script>';
 
-		self::$globals['script_vars'] .= '
+		PureChat::$globals['script_vars'] .= '
 			captcha = {
 				correct: 0,
 				boxes: ' . $this->boxes . ',
@@ -659,7 +659,7 @@ class CaptchaObject extends PureChat
 
 		if ($this->total_width < 100)
 		{
-			self::$globals['import_scripts'] .= '
+			PureChat::$globals['import_scripts'] .= '
 				<style type="text/css">
 					#captcha .first_column, #captcha .second_column {
 						margin-left: ' . (((100 - $this->total_width) / 2) + 5) . '%;
@@ -669,7 +669,7 @@ class CaptchaObject extends PureChat
 		}
 
 		// Throw them in the scope.
-		self::$globals['captcha'] = array(
+		PureChat::$globals['captcha'] = array(
 			'random' => $this->random_captcha,
 			'second_row' => $this->second_row,
 			'use_labels' => $this->use_labels,

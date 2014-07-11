@@ -68,10 +68,10 @@ class Universal extends PureChat
 	// Untested and not recommended for use.
 	public function post_message($data, $chatbot = false)
 	{
-		if (!self::$globals['user']['logged'])
+		if (!PureChat::$globals['user']['logged'])
 			return false;
 
-		$user = self::$globals['user']['id'];
+		$user = PureChat::$globals['user']['id'];
         $post = trim(htmlspecialchars($_POST['post']));
 
 		if (empty($post))
@@ -120,7 +120,7 @@ class Universal extends PureChat
 	public function load_template($classes = array(), $methods = array())
 	{
 		// Reset the array so we don't load two templates accidentally.
-		self::$globals['template'] = array();
+		PureChat::$globals['template'] = array();
 		
 		foreach ($classes as $named => $class)
 		{
@@ -128,18 +128,18 @@ class Universal extends PureChat
 			if (file_exists($filepath))
 			{
 				require_once($filepath);
-				self::$globals['template']['classes'][$named] = new $class['class'];
+				PureChat::$globals['template']['classes'][$named] = new $class['class'];
 			}
 			unset($filepath);
 		}
 		foreach ($methods as $layer => $value)
 		{
-			if (array_key_exists($value['class_key'], self::$globals['template']['classes']) && (!isset($value['condition']) || $value['condition'] == true))
+			if (array_key_exists($value['class_key'], PureChat::$globals['template']['classes']) && (!isset($value['condition']) || $value['condition'] == true))
 			{
-				if (method_exists(self::$globals['template']['classes'][$value['class_key']], $value['method']))
+				if (method_exists(PureChat::$globals['template']['classes'][$value['class_key']], $value['method']))
 				{
-					self::$globals['template']['methods'][$layer] = array(
-						'object' => self::$globals['template']['classes'][$value['class_key']],
+					PureChat::$globals['template']['methods'][$layer] = array(
+						'object' => PureChat::$globals['template']['classes'][$value['class_key']],
 						'method' => $value['method']
 					);
 				}
@@ -170,7 +170,7 @@ class Universal extends PureChat
 		if (!empty($lang))
 		{
 			foreach ($lang as $index => $value)
-				self::$lang[$index] = $value;
+				PureChat::$lang[$index] = $value;
 			
 			return true;
 		}

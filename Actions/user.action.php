@@ -84,7 +84,7 @@ class Action extends PureChat
 		// Re-Encrypt anything that's not already encrypted...
 		if (empty($user_info['password_salt']))
 		{
-			$encrypted_password = self::$universal->encrypt_password($user_info['password']);
+			$encrypted_password = PureChat::$universal->encrypt_password($user_info['password']);
 			$update_columns = array(
 				'password' => array(
 					$encrypted_password['password'],
@@ -95,7 +95,7 @@ class Action extends PureChat
 					'string'
 				)
 			);
-			self::$universal->update_user($user_info['id_user'], $update_columns);
+			PureChat::$universal->update_user($user_info['id_user'], $update_columns);
 		}
 
 		$salt = explode('_', $user_info['password_salt']);
@@ -127,7 +127,7 @@ class Action extends PureChat
 				DELETE FROM pc_online
 				WHERE user_id = :id';
 			$param = array(
-				':id' => array(self::$globals['user']['id'], 'int')
+				':id' => array(PureChat::$globals['user']['id'], 'int')
 			);
 			$this->db->query($sql, $param);
 
@@ -200,12 +200,12 @@ class Action extends PureChat
 			// If there are errors at this point, save them and continue.
 			if (!empty($errors))
 			{
-				self::$globals['registration_errors'] = $errors;
+				PureChat::$globals['registration_errors'] = $errors;
 				return false;
 			}
 
 			// Encrypt our password...
-			$encrypted_password = self::$universal->encrypt_password($_POST['password']);
+			$encrypted_password = PureChat::$universal->encrypt_password($_POST['password']);
 
 			// Otherwise we're clear for registration.
 			$username = $_POST['username'];
@@ -245,10 +245,10 @@ class Action extends PureChat
 						$this->formatEmailPassword($_POST['password']),
 						$this->script . '?action=user&perform=activate_account&key=' . $user_rand
 					),
-					self::$lang['reg_email_body']
+					PureChat::$lang['reg_email_body']
 				);
 	
-				mail($_POST['email'], self::$lang['reg_email_subject'], $email_body);
+				mail($_POST['email'], PureChat::$lang['reg_email_subject'], $email_body);
 	
 				$approve_sql = '
 					INSERT INTO pc_reg_activations (id_user, activation_key)
@@ -261,7 +261,7 @@ class Action extends PureChat
 				$this->db->query($approve_sql, $approve_params);
 			}
 			
-			self::$universal->redirect($this->script . '?success=true');
+			PureChat::$universal->redirect($this->script . '?success=true');
 		}
 	}
 
@@ -329,7 +329,7 @@ class Action extends PureChat
 	private function StatusUpdate()
 	{
 		// Better not be empty!
-		if (empty($_POST['status']) || !self::$globals['user']['logged'])
+		if (empty($_POST['status']) || !PureChat::$globals['user']['logged'])
 		{
 			echo 'nope';
 			return false;
@@ -348,7 +348,7 @@ class Action extends PureChat
 		else
 			return false;
 		
-		$uid = self::$globals['user']['id'];
+		$uid = PureChat::$globals['user']['id'];
 
 		$sql = '
 			UPDATE pc_users

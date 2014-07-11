@@ -39,7 +39,7 @@ class AdminTemplate extends PureChat
 			'settings' => 'settings_template'
 		);
 
-		self::$globals['import_scripts'] .= '
+		PureChat::$globals['import_scripts'] .= '
 		<link rel="stylesheet" type="text/css" href="' . $this->currentthemeurl . '/css/admin.css" />
 		<script type="text/javascript" src="' . $this->currentthemeurl . '/scripts/admin.js"></script>';
 	}
@@ -49,9 +49,9 @@ class AdminTemplate extends PureChat
 		echo '
 			<div class="content">
 				<ul class="tabs">
-					<li><a href="', $this->script, '">', self::$lang['page_home'], '</a></li>
-					<li><a href="', $this->script, '?page=admin">', self::$lang['page_admin'], '</a></li>
-					<li><a href="', $this->script, '?page=admin&sp=settings">', self::$lang['page_settings'], '</a>
+					<li><a href="', $this->script, '">', PureChat::$lang['page_home'], '</a></li>
+					<li><a href="', $this->script, '?page=admin">', PureChat::$lang['page_admin'], '</a></li>
+					<li><a href="', $this->script, '?page=admin&sp=settings">', PureChat::$lang['page_settings'], '</a>
 				</ul>';
 	}
 
@@ -66,16 +66,16 @@ class AdminTemplate extends PureChat
 		// Welcome box.
 		echo '
 				<div class="admin_section">
-					<div class="header_cap2">', self::$lang['velkomen_til_admin'], '</div>
+					<div class="header_cap2">', PureChat::$lang['velkomen_til_admin'], '</div>
 					<div class="lower_content_container2">
-						', self::$lang['velkomen_text'], '
+						', PureChat::$lang['velkomen_text'], '
 					</div>
 				</div>';
 
 		// PureChat news feed.
 		echo '
 				<div class="admin_section">
-					<div class="header_cap2">', self::$lang['news_feed'], '</div>
+					<div class="header_cap2">', PureChat::$lang['news_feed'], '</div>
 					<div class="lower_content_container2">
 						We can pull a news file off our website server or something.
 						However we need to build it well so it doens\'t crash the site or something
@@ -88,24 +88,24 @@ class AdminTemplate extends PureChat
 		// Information box.
 		echo '
 				<div class="admin_section">
-					<div class="header_cap">', self::$lang['software_details'], '</div>
+					<div class="header_cap">', PureChat::$lang['software_details'], '</div>
 					<div class="lower_content_container2">
-						', self::$lang['admins'], ': ';
+						', PureChat::$lang['admins'], ': ';
 
-		$loop_total = count(self::$globals['admin']['administrators']) - 1;
+		$loop_total = count(PureChat::$globals['admin']['administrators']) - 1;
 		for ($i = 0; $i <= $loop_total; $i++)
 		{
 			echo
-						self::$globals['admin']['administrators'][$i], $i != $loop_total ? ', ' : '<br />';
+						PureChat::$globals['admin']['administrators'][$i], $i != $loop_total ? ', ' : '<br />';
 		}
 
 		echo '
 						<hr />
-						', self::$lang['version'], ': ', PC_VERSION, '
+						', PureChat::$lang['version'], ': ', PC_VERSION, '
 						<hr />
-						', self::$lang['latest_version'], ':
+						', PureChat::$lang['latest_version'], ':
 						<hr />
-						', self::$lang['copyright'], ': ', PC_COPY, '
+						', PureChat::$lang['copyright'], ': ', PC_COPY, '
 					</div>
 				</div>';
 
@@ -113,7 +113,7 @@ class AdminTemplate extends PureChat
 		// Admin Notes
 		echo '
 				<div class="admin_section">
-					<div class="header_cap">', self::$lang['admin_notes'], '</div>
+					<div class="header_cap">', PureChat::$lang['admin_notes'], '</div>
 					<div class="lower_content_container2">
 						<p>
 							Matt, you can develope this if you want.
