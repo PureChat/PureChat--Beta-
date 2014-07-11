@@ -26,12 +26,19 @@
  * along with PureChat.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+//-- TODO: Get rid of the extends here...
 class MessageParser extends PureChat
 {
 
 	public $message, $user;
 
-	public function __construct($message = '', $user = '')
+	public function __construct()
+	{
+		$this->message = '';
+		$this->user    = '';
+	}
+
+	public function setMessage($message, $user)
 	{
 		$this->message = $message;
 		$this->user    = $user;

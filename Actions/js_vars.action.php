@@ -14,7 +14,6 @@ var pc_user_id = parseInt(', PureChat::$globals['user']['id'], ');
 var pc_display_name = "', PureChat::$globals['user']['display_name'], '";
 var pc_smilies = ', !empty(PureChat::$globals['smilies']) ? json_encode(PureChat::$globals['smilies']) : 'new Object()', ';
 var pc_irc_commands = ', !empty(PureChat::$globals['irc_commands']) ? json_encode(PureChat::$globals['irc_commands']) : 'new Object', ';
-var pc_bbc_codes = ', !empty(PureChat::$globals['bbc_list']) ? json_encode(PureChat::$globals['bbc_list']) : 'new Object', ';
 var pc_lang = ', json_encode(PureChat::$lang), ';
 var status = \'', PureChat::$globals['user']['status'], '\';';
 		

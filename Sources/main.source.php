@@ -81,12 +81,15 @@ class SourceMain extends PureChat
 
 	private function format_messages($messages)
 	{
+		$this->parse = new MessageParser();
 		foreach ($messages as $message)
 		{
-			$this->parse = new MessageParser($message['text'], $message['display_name']);
+			//-- TODO: We may eventually want to make $this->parse->format() with an argument of what to format to reduce lines to call.
+			$this->parse->setMessage($message['text'], $message['display_name']);
 			$this->parse->formatVulgar();
 			$this->parse->formatText();
 			$this->parse->formatSmileys();
+			$this->parse->formatURLs();
 			$message['text'] = $this->parse->getMessage();
 
 			PureChat::$globals['messages'][] = array(
