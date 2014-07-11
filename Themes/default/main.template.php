@@ -49,10 +49,10 @@ class MainTemplate extends PureChat
 
 		<!-- Load jQuery and main.js. Our main.js file is global, and effects all pages. -->
 		<script type="text/javascript" src="', $this->themesurl, '/default/scripts/jQuery.js"></script>
-		', self::$globals['user']['logged'] ? '<script type="text/javascript" src="' . $this->currentthemeurl . '/scripts/main.js"></script>' : '', '
+		', PureChat::$globals['user']['logged'] ? '<script type="text/javascript" src="' . $this->currentthemeurl . '/scripts/main.js"></script>' : '', '
 
 		<!-- Import the files specific to the page we\'re looking at. -->
-		', !empty(self::$globals['import_scripts']) ? self::$globals['import_scripts'] : '', '
+		', !empty(PureChat::$globals['import_scripts']) ? PureChat::$globals['import_scripts'] : '', '
 		
 		<!-- Define some javascript variables for use. -->
 		<script type="text/javascript" src="', $this->script, '?action=js_vars&ajax_connection=true"></script>
@@ -71,12 +71,12 @@ class MainTemplate extends PureChat
 		<div id="sidebar">';
 
 		// Avatar, or in the case of a guest, a login form.
-		if (self::$globals['user']['logged'])
+		if (PureChat::$globals['user']['logged'])
 			echo '
 			<div id="sidebar_header">
 				<div id="sidebar_avatar_container">
 					<div id="white_frame">
-						', !empty(self::$globals['user']['avatar']) ? '<img src="' . self::$globals['user']['avatar'] . '" alt="" id="sidebar_avatar" />' : '', '
+						', !empty(PureChat::$globals['user']['avatar']) ? '<img src="' . PureChat::$globals['user']['avatar'] . '" alt="" id="sidebar_avatar" />' : '', '
 					</div>
 				</div>
 			</div>';
@@ -84,25 +84,25 @@ class MainTemplate extends PureChat
 			echo '
 			<div id="sidebar_header_padded">
 				<form action="', $this->script, '?action=user&perform=login" method="post">
-					<label class="dark_label" for="username_field">', self::$lang['display_name'], '</label>
+					<label class="dark_label" for="username_field">', PureChat::$lang['display_name'], '</label>
 					<input type="text" class="dark_field" id="username_field" name="login_username" />
 
-					<label class="dark_label" for="password_field">', self::$lang['password'], '</label>
+					<label class="dark_label" for="password_field">', PureChat::$lang['password'], '</label>
 					<input type="password" class="dark_field" id="password_field" name="login_password" />
 
-					<input type="submit" value="', self::$lang['login'], '" class="dark_button" />
+					<input type="submit" value="', PureChat::$lang['login'], '" class="dark_button" />
 				</form>
 			</div>';
 
 		// User info and junk.
 		echo '
 			<div id="user_info">
-				<span id="username">', self::$globals['user']['display_name'], '</span>
-				', !self::$globals['user']['logged'] ? '<span id="logged_out_adviser">' . self::$lang['please_log_in'] . '</span>' : '', '
+				<span id="username">', PureChat::$globals['user']['display_name'], '</span>
+				', !PureChat::$globals['user']['logged'] ? '<span id="logged_out_adviser">' . PureChat::$lang['please_log_in'] . '</span>' : '', '
 				<div id="sidemenu">
-					', self::$globals['user']['logged'] ? '<a href="javascript:profile.load_info(' . self::$globals['user']['id'] . ');">' . self::$lang['profile'] . '</a> | ' : '', '
-					', self::$globals['user']['is_admin'] ? '<a href="' . $this->script . '?page=admin">' . self::$lang['admin'] . '</a> | ' : '', '
-					', self::$globals['user']['logged'] ? '<a href="' . $this->script . '?action=user&amp;perform=logout">' . self::$lang['logout'] . '</a>' : '', '
+					', PureChat::$globals['user']['logged'] ? '<a href="javascript:profile.load_info(' . PureChat::$globals['user']['id'] . ');">' . PureChat::$lang['profile'] . '</a> | ' : '', '
+					', PureChat::$globals['user']['is_admin'] ? '<a href="' . $this->script . '?page=admin">' . PureChat::$lang['admin'] . '</a> | ' : '', '
+					', PureChat::$globals['user']['logged'] ? '<a href="' . $this->script . '?action=user&amp;perform=logout">' . PureChat::$lang['logout'] . '</a>' : '', '
 				</div>
 				<div id="status_bar">
 					<div id="shine"></div>
@@ -113,8 +113,8 @@ class MainTemplate extends PureChat
 		echo '
 			<div id="online_list">
 				<div id="users_online">
-					', self::$globals['user']['logged'] ? '<span id="online_text"></span>' : '', '
-					', self::$globals['user']['logged'] ? '<hr class="sidebar_hr" />' : '', '
+					', PureChat::$globals['user']['logged'] ? '<span id="online_text"></span>' : '', '
+					', PureChat::$globals['user']['logged'] ? '<hr class="sidebar_hr" />' : '', '
 					<ul>
 						<li><!-- This is cleared by the JS. It\'s only here to fool the validator. --></li>
 					</ul>
@@ -144,7 +144,7 @@ class MainTemplate extends PureChat
 		echo '
 		<div id="footer">';
 
-		if (self::$globals['user']['logged'])
+		if (PureChat::$globals['user']['logged'])
 			echo '
 			<form action="', $this->script, '" method="post" onsubmit="s.call_waiting(s.post_new); return false;">
 				<div> <!-- XHTML Strict requires forum inputs to be encapsulated. -->
@@ -153,15 +153,15 @@ class MainTemplate extends PureChat
 					</div>
 
 					<div id="icon_container">
-						<a id="smilies_link" title="', self::$lang['smilies_title'], '" class="centertext">
-							<img src="', $this->currentthemeurl, '/images/smilies/sm_smile.png" alt="', self::$lang['smilies_title'], '" />
+						<a id="smilies_link" title="', PureChat::$lang['smilies_title'], '" class="centertext">
+							<img src="', $this->currentthemeurl, '/images/smilies/sm_smile.png" alt="', PureChat::$lang['smilies_title'], '" />
 						</a>
-						<a id="bbc_link" title="', self::$lang['bbc_title'], '" class="centertext">
-							<img src="', $this->currentthemeurl, '/images/T.png" alt="', self::$lang['bbc_title'], '" />
+						<a id="bbc_link" title="', PureChat::$lang['bbc_title'], '" class="centertext">
+							<img src="', $this->currentthemeurl, '/images/T.png" alt="', PureChat::$lang['bbc_title'], '" />
 						</a>
 					</div>
 
-					<input type="submit" id="message_submit" value="', self::$lang['post'], '" />
+					<input type="submit" id="message_submit" value="', PureChat::$lang['post'], '" />
 				</div>
 			</form>';
 			

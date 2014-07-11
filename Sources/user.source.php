@@ -38,7 +38,7 @@ class User extends PureChat
 
 		if (isset($_SESSION['user']['full_load']))
 		{
-			self::$globals['user'] = &$_SESSION['user'];
+			PureChat::$globals['user'] = &$_SESSION['user'];
 			return true;
 		}
 
@@ -77,7 +77,7 @@ class User extends PureChat
 			'status' => (string) $user['status'],
 			'full_load' => true
 		);
-		self::$globals['user'] = &$_SESSION['user'];
+		PureChat::$globals['user'] = &$_SESSION['user'];
 	}
 
 	public function get_groups()
@@ -93,7 +93,7 @@ class User extends PureChat
 			return false;
 		foreach ($q as $key => $value)
 		{
-			self::$globals['groups'][$value['id_group']] = array(
+			PureChat::$globals['groups'][$value['id_group']] = array(
 				'name' => $value['group_name'],
 				'type' => $value['group_type']
 			);
@@ -102,7 +102,7 @@ class User extends PureChat
 
 	private function make_guest()
 	{
-		self::$globals['user'] = array(
+		PureChat::$globals['user'] = array(
 			'logged' => (bool) false,
 			'approved' => (bool) false,
 			'group' => 0,
@@ -113,7 +113,7 @@ class User extends PureChat
 			'email' => '',
 			'first_name' => '',
 			'last_name' => '',
-			'display_name' => self::$lang['guest'],
+			'display_name' => PureChat::$lang['guest'],
 			'avatar' => '',
 			'posts' => '',
 			'status' => 'available'

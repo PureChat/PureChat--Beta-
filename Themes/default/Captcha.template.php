@@ -37,18 +37,18 @@ class CaptchaTemplate extends PureChat
 	{
 		echo '
 			<div id="captcha_cont">
-				<strong>', self::$lang['captcha_title'], '</strong>
+				<strong>', PureChat::$lang['captcha_title'], '</strong>
 				<br />
-				<span id="captcha_desc">', self::$lang['captcha_desc'], '</span>
+				<span id="captcha_desc">', PureChat::$lang['captcha_desc'], '</span>
 				<div id="captcha">
 					<div class="upper_space first_column">';
 					$current_item = 0;
-					foreach (self::$globals['captcha']['random'] as $key => $value)
+					foreach (PureChat::$globals['captcha']['random'] as $key => $value)
 					{
 						echo '
-							<div id="tile_', ($key + 1), '" class="start centertext' , $current_item != 0 ? ' middle' : '', $current_item == 0 && self::$globals['captcha']['box_count'] == 1 ? ' top_left top_right' : ($current_item == 0 ? ' top_left' : ($current_item + 1 == self::$globals['captcha']['box_count'] ? ' top_right' : '')), '">
+							<div id="tile_', ($key + 1), '" class="start centertext' , $current_item != 0 ? ' middle' : '', $current_item == 0 && PureChat::$globals['captcha']['box_count'] == 1 ? ' top_left top_right' : ($current_item == 0 ? ' top_left' : ($current_item + 1 == PureChat::$globals['captcha']['box_count'] ? ' top_right' : '')), '">
 								<img src="', $this->currentthemeurl, '/images/fugue/24/', $value['url'], '.png" alt="', $value['title'], '" title="', $value['title'], '" />
-								', self::$globals['captcha']['use_labels'] == true ? '<span class="label">' . $value['title'] . '</span>' : '', '
+								', PureChat::$globals['captcha']['use_labels'] == true ? '<span class="label">' . $value['title'] . '</span>' : '', '
 							</div>
 						';
 						++$current_item;
@@ -58,12 +58,12 @@ class CaptchaTemplate extends PureChat
 					</div>
 					<div class="second_column">';
 					$current_item = 0;
-					foreach (self::$globals['captcha']['second_row'] as $key => $value)
+					foreach (PureChat::$globals['captcha']['second_row'] as $key => $value)
 					{
 						echo '
-							<div id="landing_', ($key + 1), '" class="landing droppable centertext' , $current_item != 0 ? ' middle' : '', $current_item == 0 && self::$globals['captcha']['box_count'] == 1 ? ' bottom_left bottom_right' : ($current_item == 0 ? ' bottom_left' : ($current_item + 1 == self::$globals['captcha']['box_count'] ? ' bottom_right' : '')), '">
+							<div id="landing_', ($key + 1), '" class="landing droppable centertext' , $current_item != 0 ? ' middle' : '', $current_item == 0 && PureChat::$globals['captcha']['box_count'] == 1 ? ' bottom_left bottom_right' : ($current_item == 0 ? ' bottom_left' : ($current_item + 1 == PureChat::$globals['captcha']['box_count'] ? ' bottom_right' : '')), '">
 								<img src="', $this->currentthemeurl, '/images/fugue/24/', $value['url'], '.png" alt="', $value['title'], '" title="', $value['title'], '" />
-								', self::$globals['captcha']['use_labels'] == true ? '<span class="label">' . $value['title'] . '</span>' : '', '
+								', PureChat::$globals['captcha']['use_labels'] == true ? '<span class="label">' . $value['title'] . '</span>' : '', '
 							</div>
 						';
 						++$current_item;

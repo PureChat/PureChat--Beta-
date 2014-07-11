@@ -51,7 +51,7 @@ class Action extends PureChat
 
 	private function load_info()
 	{
-		if (!self::$globals['user']['logged'] || !isset($_POST['user_id']))
+		if (!PureChat::$globals['user']['logged'] || !isset($_POST['user_id']))
 			return false;
 
 		$sql = '
@@ -68,7 +68,7 @@ class Action extends PureChat
 
 		echo json_encode(
 			array(
-				'allow_edit' => self::$globals['user']['is_admin'] || self::$globals['user']['id'] == (int)$_POST['user_id'] ? 'true' : 'false',
+				'allow_edit' => PureChat::$globals['user']['is_admin'] || PureChat::$globals['user']['id'] == (int)$_POST['user_id'] ? 'true' : 'false',
 				'data' => $info
 			)
 		);
@@ -76,13 +76,13 @@ class Action extends PureChat
 
 	private function update()
 	{
-		if (empty($_POST['field']) || empty($_POST['value']) || empty($_POST['id']) || !self::$globals['user']['logged'])
+		if (empty($_POST['field']) || empty($_POST['value']) || empty($_POST['id']) || !PureChat::$globals['user']['logged'])
 			return false;
 
-		$owned = (int)$_POST['id'] == (int)self::$globals['user']['id'] ? true : false;
+		$owned = (int)$_POST['id'] == (int)PureChat::$globals['user']['id'] ? true : false;
 
 		// Permission check.
-		if (!self::$globals['user']['is_admin'] && !$owned)
+		if (!PureChat::$globals['user']['is_admin'] && !$owned)
 			return false;
 
 		switch ($_POST['field'])
@@ -128,11 +128,11 @@ class Action extends PureChat
 
 		if ($success)
 		{
-			call_user_func(array(self::$universal, 'load_language'), 'profile');
+			call_user_func(array(PureChat::$universal, 'load_language'), 'profile');
 			
 			$return = array(
 				'status' => 'success',
-				'title' => self::$lang['fieldname_' . $field],
+				'title' => PureChat::$lang['fieldname_' . $field],
 				'data' => htmlspecialchars(trim($value), ENT_QUOTES)
 			);
 
@@ -150,7 +150,7 @@ class Action extends PureChat
 		$member = (int) $_GET['member'];
 
 		// !! Permissionize
-		if (!self::$globals['user']['logged'] || ($member != self::$globals['user']['id'] && !self::$globals['user']['is_admin']))
+		if (!PureChat::$globals['user']['logged'] || ($member != PureChat::$globals['user']['id'] && !PureChat::$globals['user']['is_admin']))
 			return false;
 
 		if (!empty($_GET['type']) && $_GET['type'] == 'file')

@@ -49,7 +49,7 @@ class Action extends PureChat
 
 	private function return_list()
 	{
-		if (!self::$globals['user']['logged'])
+		if (!PureChat::$globals['user']['logged'])
 			return false;
 
 		$sql = '
@@ -72,33 +72,33 @@ class Action extends PureChat
 			{
 				case 'available':
 					$s = array(
-						'text' => self::$lang['available'],
+						'text' => PureChat::$lang['available'],
 						'icon' => $this->currentthemeurl . '/images/available.png'
 					);
 					break;
 
 				case 'busy':
 					$s = array(
-						'text' => self::$lang['busy'],
+						'text' => PureChat::$lang['busy'],
 						'icon' => $this->currentthemeurl . '/images/busy.png'
 					);
 					break;
 
 				case 'invisible':
 					$s = array(
-						'text' => self::$lang['invisible'],
+						'text' => PureChat::$lang['invisible'],
 						'icon' => $this->currentthemeurl . '/images/invisible.png'
 					);
 					break;
 
 				case 'away':
 					$s = array(
-						'text' => self::$lang['away'],
+						'text' => PureChat::$lang['away'],
 						'icon' => $this->currentthemeurl . '/images/away.png'
 					);
 					break;
 			}
-			if ($i['status'] != 'invisible' || (self::$globals['user']['is_admin'] || self::$globals['user']['is_mod']))
+			if ($i['status'] != 'invisible' || (PureChat::$globals['user']['is_admin'] || PureChat::$globals['user']['is_mod']))
 			{
 				$response['members'][] = array(
 					'id' => $i['user_id'],

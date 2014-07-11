@@ -31,7 +31,7 @@ class MainAction extends PureChat
 	public function init()
 	{
 		// We don't need to do this every time someone posts a new message or something.
-		if (!self::$globals['ajax'])
+		if (!PureChat::$globals['ajax'])
 			$this->remove_older();
 
 		$this->update_online_list();
@@ -69,14 +69,14 @@ class MainAction extends PureChat
 
 	private function update_online_list()
 	{
-		if (self::$globals['user']['logged'])
+		if (PureChat::$globals['user']['logged'])
 		{
 			$sql = '
 				SELECT id
 				FROM pc_online
 				WHERE user_id = :user';
 			$params = array(
-				':user' => array(self::$globals['user']['id'], 'int')
+				':user' => array(PureChat::$globals['user']['id'], 'int')
 			);
 			$data = $this->db->get_one($sql, $params);
 
@@ -87,7 +87,7 @@ class MainAction extends PureChat
 					INSERT INTO pc_online (user_id)
 					VALUES (:id)';
 				$params = array(
-					':id' => array(self::$globals['user']['id'], 'int')
+					':id' => array(PureChat::$globals['user']['id'], 'int')
 				);
 				$data = $this->db->query($sql, $params);
 			}
@@ -99,7 +99,7 @@ class MainAction extends PureChat
 					SET time = NOW()
 					WHERE user_id = :id';
 				$param = array(
-					':id' => array(self::$globals['user']['id'], 'int')
+					':id' => array(PureChat::$globals['user']['id'], 'int')
 				);
 				$this->db->query($sql, $param);
 			}

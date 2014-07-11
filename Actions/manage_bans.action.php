@@ -42,8 +42,8 @@ class Action extends PureChat
 	public function init()
 	{
 		// Admins only please.
-		if (!self::$globals['user']['is_admin'])
-			self::$universal->redirect();
+		if (!PureChat::$globals['user']['is_admin'])
+			PureChat::$universal->redirect();
 			
 		if (empty($_GET['perform']))
 			return false;

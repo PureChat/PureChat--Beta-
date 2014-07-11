@@ -15,6 +15,6 @@ class GuestSource extends PureChat
 				'method' => 'content'
 			),
 		);
-		self::$universal->load_template($class, $method);
+		PureChat::$universal->load_template($class, $method);
 	}
 }

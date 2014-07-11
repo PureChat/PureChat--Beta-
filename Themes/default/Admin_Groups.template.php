@@ -18,12 +18,12 @@ class AdminGroups extends PureChat
 			</div>
 			<div class="lower_content_container">
 				<div style="border: 1px solid #a9a9a9;">';
-				if (empty(self::$globals['groups']))
-					echo self::$lang['groups_fatal'];
+				if (empty(PureChat::$globals['groups']))
+					echo PureChat::$lang['groups_fatal'];
 				else
 				{
-					$last_group = array_keys(self::$globals['groups']);
-					foreach (self::$globals['groups'] as $key => $value)
+					$last_group = array_keys(PureChat::$globals['groups']);
+					foreach (PureChat::$globals['groups'] as $key => $value)
 					{
 						echo '
 							<div style="', $key != end($last_group) ? 'border-bottom: 1px solid #a9a9a9; ' : '', 'padding: 10px;">

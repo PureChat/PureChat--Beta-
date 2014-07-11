@@ -3,8 +3,8 @@ class Source extends PureChat
 {
 	public function init()
 	{
-		if (!self::$globals['user']['is_admin'])
-			self::$universal->redirect();
+		if (!PureChat::$globals['user']['is_admin'])
+			PureChat::$universal->redirect();
 			
 		$this->load_info();
 		$this->load_sub_source();
@@ -20,7 +20,7 @@ class Source extends PureChat
 		switch ($_GET['sp'])
 		{
 			case 'add_ban':
-				self::$universal->load_source(
+				PureChat::$universal->load_source(
 					'manage_bans', // File Name.
 					'ManageBanSource', // Class Name
 					$sub_source, // Class Reference Variable.
@@ -74,7 +74,7 @@ class Source extends PureChat
 			)
 		);
 
-		self::$universal->load_template($files, $methods);
+		PureChat::$universal->load_template($files, $methods);
 	}
 
 	protected function load_info()
@@ -83,6 +83,6 @@ class Source extends PureChat
 		// We'll use a query once that happens.
 		// In the mean time, static FTW.
 
-		self::$globals['admin']['administrators'] = array('The Craw', 'Matthew K.');
+		PureChat::$globals['admin']['administrators'] = array('The Craw', 'Matthew K.');
 	}
 }
